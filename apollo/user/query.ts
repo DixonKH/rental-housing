@@ -143,20 +143,24 @@ export const GET_PROPERTIES = gql`
 			list {
 				_id
 				propertyType
+				propertyAmenities
+				stayDuration
 				propertyStatus
 				propertyLocation
 				propertyAddress
 				propertyTitle
 				propertyPrice
+				propertyDeposite
+				propertyUtilityBills
 				propertySquare
 				propertyBeds
 				propertyRooms
 				propertyViews
 				propertyLikes
+				propertyComments
 				propertyRank
 				propertyImages
 				propertyDesc
-				propertyBarter
 				propertyRent
 				memberId
 				soldAt
@@ -164,6 +168,11 @@ export const GET_PROPERTIES = gql`
 				constructedAt
 				createdAt
 				updatedAt
+				meLiked {
+					memberId
+					likeRefId
+					myFavorite
+				}
 				memberData {
 					_id
 					memberType
@@ -175,21 +184,21 @@ export const GET_PROPERTIES = gql`
 					memberImage
 					memberAddress
 					memberDesc
-					memberWarnings
-					memberBlocks
 					memberProperties
-					memberRank
+					memberArticles
+					memberFollowers
+					memberFollowings
 					memberPoints
 					memberLikes
 					memberViews
+					memberComments
+					memberRank
+					memberWarnings
+					memberBlocks
 					deletedAt
 					createdAt
 					updatedAt
-				}
-				meLiked {
-					memberId
-					likeRefId
-					myFavorite
+					accessToken
 				}
 			}
 			metaCounter {

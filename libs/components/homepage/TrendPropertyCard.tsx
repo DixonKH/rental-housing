@@ -34,7 +34,7 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 				</Box>
 				<Box component={'div'} className={'info'}>
 					<strong className={'title'}>{property.propertyTitle}</strong>
-					<p className={'desc'}>{property.propertyDesc ?? 'no description'}</p>
+					<p className={'desc'}>{property.propertyAddress ?? 'no address'}</p>
 					<div className={'options'}>
 						<div>
 							<img src="/img/icons/bed.svg" alt="" />
@@ -53,7 +53,6 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 					<div className={'bott'}>
 						<p>
 							{property.propertyRent ? 'Rent' : ''} {property.propertyRent && property.propertyBarter && '/'}{' '}
-							{property.propertyBarter ? 'Barter' : ''}
 						</p>
 						<div className="view-like-box">
 							<IconButton color={'default'}>
@@ -85,7 +84,7 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 				</Box>
 				<Box component={'div'} className={'info'}>
 					<strong className={'title'}>{property.propertyTitle}</strong>
-					<p className={'desc'}>{property.propertyDesc ?? 'no description'}</p>
+					<p className={'desc'}>{property.propertyAddress ?? 'no address'}</p>
 					<div className={'options'}>
 						<div>
 							<img src="/img/icons/bed.svg" alt="" />
@@ -104,7 +103,6 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 					<div className={'bott'}>
 						<p>
 							{property.propertyRent ? 'Rent' : ''} {property.propertyRent && property.propertyBarter && '/'}{' '}
-							{property.propertyBarter ? 'Barter' : ''}
 						</p>
 						<div className="view-like-box">
 							<IconButton color={'default'}>
