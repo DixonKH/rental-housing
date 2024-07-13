@@ -4,7 +4,7 @@ import useDeviceDetect from '../../hooks/useDeviceDetect';
 import Head from 'next/head';
 import Top from '../Top';
 import Footer from '../Footer';
-import { Stack } from '@mui/material';
+import { Container, Stack } from '@mui/material';
 import { getJwtToken, updateUserInfo } from '../../auth';
 import Chat from '../Chat';
 import { useReactiveVar } from '@apollo/client';
@@ -29,9 +29,10 @@ const withLayoutBasic = (Component: any) => {
 
 			switch (router.pathname) {
 				case '/property':
-					title = 'Property Search';
-					desc = 'We are glad to see you again!';
-					bgImage = '/img/banner/properties.png';
+					title = 'Student Accomodation';
+					desc =
+						'We are glad to see you again! Here you will find all types of student accommodation including student houses, flats and halls.';
+					bgImage = '/img/banner/cities/INCHEON.webp';
 					break;
 				case '/agent':
 					title = 'Agents';
@@ -123,17 +124,14 @@ const withLayoutBasic = (Component: any) => {
 							<Top />
 						</Stack>
 
-						<Stack
-							className={`header-basic ${authHeader && 'auth'}`}
-							style={{
-								backgroundImage: `url(${memoizedValues.bgImage})`,
-								backgroundSize: 'cover',
-								boxShadow: 'inset 10px 40px 150px 40px rgb(24 22 36)',
-							}}
-						>
+						<Stack className={`header-basic ${authHeader && 'auth'}`}>
 							<Stack className={'container'}>
 								<strong>{t(memoizedValues.title)}</strong>
 								<span>{t(memoizedValues.desc)}</span>
+							</Stack>
+							<Stack className="container-img">
+								<img src={memoizedValues.bgImage} alt="" />
+								<img className="img-2" src="/img/banner/locationFilterImg.svg" alt="" />
 							</Stack>
 						</Stack>
 

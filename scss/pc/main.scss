@@ -56,6 +56,7 @@ body::-webkit-scrollbar {
 				box-sizing: border-box;
 				z-index: 99;
 				align-items: center;
+				background-color: #212138;
 				border-top: 1px solid rgba(255, 255, 255, 0.07);
 				&.transparent {
 					background-color: #181a209e;
@@ -181,10 +182,13 @@ body::-webkit-scrollbar {
 		background-image: url('/img/banner/student.jpg');
 		background-size: cover;
 		.container {
-			position: relative;
-			margin-top: 20px;
+			position: absolute;
 			flex-direction: column;
 			align-items: center;
+			z-index: 99;
+			bottom: 0;
+			left: 50%;
+			transform: translate(-50%, -50%);
 			.search-box {
 				position: relative;
 				margin-top: 56px;
@@ -196,6 +200,9 @@ body::-webkit-scrollbar {
 				justify-content: space-between;
 				background: rgba(255, 255, 255, 0.28);
 				border-radius: 12px;
+				backdrop-filter: blur(30px);
+				box-shadow: 0px 0px 30px rgba(227, 228, 237, 0.37);
+				border: 2px solid rgba(255, 255, 255, 0.18);
 				.select-box {
 					width: 712px;
 					display: flex;
@@ -413,35 +420,53 @@ body::-webkit-scrollbar {
 	}
 
 	.header-basic {
+		margin-top: 60px;
+		padding: 0 4%;
 		position: relative;
 		width: 100%;
-		height: 557px;
+		height: 385px;
 		display: flex;
 		flex-direction: row;
+		align-items: center;
 		justify-content: center;
-		background: black;
+		background-color: #fafafa;
 		&.auth {
-			height: 300px;
+			display: none;
 		}
 		.container {
-			margin-top: 175px;
 			strong {
-				color: #fff;
+				color: #1c304a;
 				font-family: $font;
-				font-size: 48px;
+				font-size: 46px;
 				font-style: normal;
-				font-weight: 600;
-				line-height: normal;
+				font-weight: 800;
+				line-height: 1.1;
 				letter-spacing: 0.96px;
 				text-transform: capitalize;
 			}
 			span {
-				color: #fff;
+				margin-top: 8px;
+				color: #1c304a;
 				font-family: $font;
-				font-size: 24px;
+				font-size: 18px;
 				font-style: normal;
-				font-weight: 400;
+				font-weight: 600;
 				line-height: 26px;
+			}
+		}
+		.container-img {
+			position: relative;
+			img {
+				width: 700px;
+				height: 375px;
+			}
+			.img-2 {
+				position: absolute;
+				width: 700px;
+				height: 400px;
+				top: 0px;
+				left: 0px;
+				z-index: 1;
 			}
 		}
 	}
@@ -649,10 +674,15 @@ body::-webkit-scrollbar {
 		position: relative;
 		padding: 60px 0px 18px 0px;
 		width: 100%;
-		height: auto;
+		height: 480px;
 		display: flex;
 		flex-direction: row;
-		background: #181a20;
+		background: #212138;
+		background-image: url('../../public/img/download.svg');
+		background-repeat: repeat-x;
+		background-size: 620px;
+		background-position: bottom 0px left 0px;
+		z-index: 999;
 		.footer-container {
 			width: 1300px;
 			height: auto;
@@ -662,42 +692,39 @@ body::-webkit-scrollbar {
 				flex-direction: row;
 				justify-content: space-between;
 				.left {
-					height: 360px;
+					height: 220px;
 					display: flex;
-					flex-direction: column;
+					width: auto;
+					flex-direction: row;
 					justify-content: space-between;
-					.footer-box {
+					gap: 40px;
+					div {
 						display: flex;
 						flex-direction: column;
-						.logo {
-							width: 128px;
-							height: 52px;
-							cursor: pointer;
-						}
-						span {
-							color: #bebdbd;
-							font-family: $font;
-							font-size: 14px;
-							font-style: normal;
-							font-weight: 400;
-							text-transform: capitalize;
-						}
-						p {
+						strong {
+							margin-bottom: 3px;
 							color: #fff;
 							font-family: $font;
-							font-size: 15px;
+							font-size: 16px;
 							font-style: normal;
 							font-weight: 600;
 							line-height: normal;
 							text-transform: capitalize;
 						}
-						.media-box {
-							margin-top: 12px;
-							color: #929495;
-							svg {
-								font-size: 32px;
-								margin-right: 22px;
-								cursor: pointer;
+						span {
+							margin-top: 25px;
+							color: #f8f8f8;
+							font-family: $font;
+							font-size: 15px;
+							font-style: normal;
+							line-height: 10px;
+							font-weight: 400;
+							cursor: pointer;
+							transition-property: font-size;
+							transition-duration: 0.25s;
+							&:hover {
+								color: #ffb31e;
+								font-size: 16px;
 							}
 						}
 					}
@@ -706,6 +733,53 @@ body::-webkit-scrollbar {
 					display: flex;
 					flex-direction: column;
 					.top {
+						display: flex;
+						flex-direction: row;
+						justify-content: space-between;
+						.footer-box {
+							display: flex;
+							flex-direction: column;
+							.media-box {
+								margin-top: 12px;
+								color: #929495;
+								svg {
+									font-size: 32px;
+									margin-right: 22px;
+									color: #fff;
+									cursor: pointer;
+									transition-property: font-size;
+									transition-duration: 0.25s;
+									&:hover {
+										color: #ffb31e;
+										font-size: 33px;
+									}
+								}
+							}
+							.logo {
+								width: 150px;
+								height: 100px;
+								cursor: pointer;
+							}
+							span {
+								color: #bebdbd;
+								font-family: $font;
+								font-size: 14px;
+								font-style: normal;
+								font-weight: 400;
+								text-transform: capitalize;
+							}
+							p {
+								color: #fff;
+								font-family: $font;
+								font-size: 15px;
+								font-style: normal;
+								font-weight: 600;
+								line-height: normal;
+								text-transform: capitalize;
+							}
+						}
+					}
+					.bottom {
 						display: flex;
 						flex-direction: column;
 						strong {
@@ -728,6 +802,7 @@ body::-webkit-scrollbar {
 							box-sizing: border-box;
 							border-radius: 12px;
 							background: #212329;
+							background: #707175;
 							input {
 								margin-right: 10px;
 								width: 85%;
@@ -740,48 +815,18 @@ body::-webkit-scrollbar {
 								font-weight: 400;
 								line-height: 26px;
 								background: none;
-							}
-							span {
-								color: #fff;
-								font-family: $font;
-								font-size: 15px;
-								font-style: normal;
-								font-weight: 600;
-								line-height: normal;
-								cursor: pointer;
-							}
-						}
-					}
-					.bottom {
-						margin-top: 60px;
-						display: flex;
-						flex-direction: row;
-						justify-content: space-between;
-						div {
-							display: flex;
-							flex-direction: column;
-							strong {
-								margin-bottom: 3px;
-								color: #fff;
-								font-family: $font;
-								font-size: 15px;
-								font-style: normal;
-								font-weight: 600;
-								line-height: normal;
-								text-transform: capitalize;
-							}
-							span {
-								margin-top: 25px;
-								color: #bebdbd;
-								font-family: $font;
-								font-size: 14px;
-								font-style: normal;
-								font-weight: 400;
-								cursor: pointer;
-								&:hover {
-									color: #ffffff;
-									text-decoration-line: underline;
+								&::placeholder {
+									color: #dde1ec;
 								}
+							}
+							span {
+								color: #fff;
+								font-family: $font;
+								font-size: 15px;
+								font-style: normal;
+								font-weight: 600;
+								line-height: normal;
+								cursor: pointer;
 							}
 						}
 					}

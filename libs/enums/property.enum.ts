@@ -1,7 +1,28 @@
 export enum PropertyType {
 	APARTMENT = 'APARTMENT',
-	VILLA = 'VILLA',
+	DORMITORY = 'DORMITORY',
+	SINGLE_ROOM = 'SINGLE_ROOM',
+	STUDIO = 'STUDIO',
 	HOUSE = 'HOUSE',
+}
+
+export enum PropertyAmenities {
+	ELEVATOR = 'ELEVATOR',
+	INTERNET = 'INTERNET',
+	PARKING = 'PARKING',
+	WASHING_MACHINE = 'WASHING_MACHINE',
+	DISHWASHER = 'DISHWASHER',
+	AIR_CONDITIONER = 'AIR_CONDITIONER',
+	VACUUM_CLEANER = 'VACUUM_CLEANER',
+	HEAT_PUMP = 'HEAT_PUMP',
+	FURNITURE = 'FURNITURE',
+	TV = 'TV',
+}
+
+export enum StayDuration {
+	MONTHLY = 'MONTHLY',
+	HALF_YEATR = 'HALF_YEATR',
+	ANNUAL = 'ANNUAL',
 }
 
 export enum PropertyStatus {
@@ -19,5 +40,11 @@ export enum PropertyLocation {
 	GWANGJU = 'GWANGJU',
 	CHONJU = 'CHONJU',
 	DAEJON = 'DAEJON',
-	JEJU = 'JEJU',
+}
+
+export enum PropertyUtilityBills {
+	GAS = 'GAS',
+	WATER = 'WATER',
+	ELECTRICITY = 'ELECTRICITY',
+	INTERNET = 'INTERNET',
 }

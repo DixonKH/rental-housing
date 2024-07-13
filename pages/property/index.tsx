@@ -10,7 +10,13 @@ import { PropertiesInquiry } from '../../libs/types/property/property.input';
 import { Property } from '../../libs/types/property/property';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
-import { Direction } from '../../libs/enums/common.enum';
+import { Direction, Message } from '../../libs/enums/common.enum';
+import CommunityBoards from '../../libs/components/property/CommunityBoards';
+import { GET_PROPERTIES } from '../../apollo/user/query';
+import { useMutation, useQuery } from '@apollo/client';
+import { T } from '../../libs/types/common';
+import { LIKE_TARGET_PROPERTY } from '../../apollo/user/mutation';
+import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -33,6 +39,21 @@ const PropertyList: NextPage = ({ initialInput, ...props }: any) => {
 
 	/** APOLLO REQUESTS **/
 
+	const {
+		loading: getPropertiesLoading,
+		data: getPropertiesData,
+		error: getPropertiesError,
+		refetch: getPropertiesRefetch,
+	} = useQuery(GET_PROPERTIES, {
+		fetchPolicy: 'network-only',
+		variables: { input: searchFilter },
+		notifyOnNetworkStatusChange: true,
+		onCompleted: (data: T) => {
+			setProperties(data?.getProperties?.list);
+			setTotal(data?.getProperties?.metaCounter[0]?.total);
+		},
+	});
+
 	/** LIFECYCLES **/
 	useEffect(() => {
 		if (router.query.input) {
@@ -43,7 +64,10 @@ const PropertyList: NextPage = ({ initialInput, ...props }: any) => {
 		setCurrentPage(searchFilter.page === undefined ? 1 : searchFilter.page);
 	}, [router]);
 
-	useEffect(() => {}, [searchFilter]);
+	useEffect(() => {
+		console.log('searchFilter: ', searchFilter);
+		// getPropertiesRefetch({ input: searchFilter }).then();
+	}, [searchFilter]);
 
 	/** HANDLERS **/
 	const handlePaginationChange = async (event: ChangeEvent<unknown>, value: number) => {
@@ -92,6 +116,10 @@ const PropertyList: NextPage = ({ initialInput, ...props }: any) => {
 		return (
 			<div id="property-list-page" style={{ position: 'relative' }}>
 				<div className="container">
+					<Stack className={'filter-config'}>
+						{/* @ts-ignore */}
+						<Filter searchFilter={searchFilter} setSearchFilter={setSearchFilter} initialInput={initialInput} />
+					</Stack>
 					<Box component={'div'} className={'right'}>
 						<span>Sort by</span>
 						<div>
@@ -127,10 +155,6 @@ const PropertyList: NextPage = ({ initialInput, ...props }: any) => {
 						</div>
 					</Box>
 					<Stack className={'property-page'}>
-						<Stack className={'filter-config'}>
-							{/* @ts-ignore */}
-							<Filter searchFilter={searchFilter} setSearchFilter={setSearchFilter} initialInput={initialInput} />
-						</Stack>
 						<Stack className="main-config" mb={'76px'}>
 							<Stack className={'list-config'}>
 								{properties?.length === 0 ? (
@@ -168,6 +192,7 @@ const PropertyList: NextPage = ({ initialInput, ...props }: any) => {
 						</Stack>
 					</Stack>
 				</div>
+				<CommunityBoards />
 			</div>
 		);
 	}
