@@ -48,19 +48,24 @@ export const GET_ALL_PROPERTIES_BY_ADMIN = gql`
 			list {
 				_id
 				propertyType
+				propertyAmenities
+				stayDuration
 				propertyStatus
 				propertyLocation
 				propertyAddress
 				propertyTitle
 				propertyPrice
+				propertyDeposite
+				propertyUtilityBills
 				propertySquare
 				propertyBeds
 				propertyRooms
 				propertyViews
 				propertyLikes
+				propertyComments
+				propertyRank
 				propertyImages
 				propertyDesc
-				propertyBarter
 				propertyRent
 				memberId
 				soldAt
@@ -79,13 +84,17 @@ export const GET_ALL_PROPERTIES_BY_ADMIN = gql`
 					memberImage
 					memberAddress
 					memberDesc
-					memberWarnings
-					memberBlocks
 					memberProperties
-					memberRank
+					memberArticles
+					memberFollowers
+					memberFollowings
 					memberPoints
 					memberLikes
 					memberViews
+					memberComments
+					memberRank
+					memberWarnings
+					memberBlocks
 					deletedAt
 					createdAt
 					updatedAt

@@ -87,19 +87,24 @@ export const GET_PROPERTY = gql`
 		getProperty(propertyId: $input) {
 			_id
 			propertyType
+			propertyAmenities
+			stayDuration
 			propertyStatus
 			propertyLocation
 			propertyAddress
 			propertyTitle
 			propertyPrice
+			propertyDeposite
+			propertyUtilityBills
 			propertySquare
 			propertyBeds
 			propertyRooms
 			propertyViews
 			propertyLikes
+			propertyComments
+			propertyRank
 			propertyImages
 			propertyDesc
-			propertyBarter
 			propertyRent
 			memberId
 			soldAt
@@ -107,6 +112,11 @@ export const GET_PROPERTY = gql`
 			constructedAt
 			createdAt
 			updatedAt
+			meLiked {
+				memberId
+				likeRefId
+				myFavorite
+			}
 			memberData {
 				_id
 				memberType
@@ -118,20 +128,21 @@ export const GET_PROPERTY = gql`
 				memberImage
 				memberAddress
 				memberDesc
-				memberWarnings
-				memberBlocks
+				memberProperties
+				memberArticles
+				memberFollowers
+				memberFollowings
 				memberPoints
 				memberLikes
 				memberViews
+				memberComments
+				memberRank
+				memberWarnings
+				memberBlocks
 				deletedAt
 				createdAt
 				updatedAt
 				accessToken
-			}
-			meLiked {
-				memberId
-				likeRefId
-				myFavorite
 			}
 		}
 	}
@@ -214,19 +225,24 @@ export const GET_AGENT_PROPERTIES = gql`
 			list {
 				_id
 				propertyType
+				propertyAmenities
+				stayDuration
 				propertyStatus
 				propertyLocation
 				propertyAddress
 				propertyTitle
 				propertyPrice
+				propertyDeposite
+				propertyUtilityBills
 				propertySquare
 				propertyBeds
 				propertyRooms
 				propertyViews
 				propertyLikes
+				propertyComments
+				propertyRank
 				propertyImages
 				propertyDesc
-				propertyBarter
 				propertyRent
 				memberId
 				soldAt
@@ -248,11 +264,15 @@ export const GET_FAVORITES = gql`
 			list {
 				_id
 				propertyType
+				propertyAmenities
+				stayDuration
 				propertyStatus
 				propertyLocation
 				propertyAddress
 				propertyTitle
 				propertyPrice
+				propertyDeposite
+				propertyUtilityBills
 				propertySquare
 				propertyBeds
 				propertyRooms
@@ -262,7 +282,6 @@ export const GET_FAVORITES = gql`
 				propertyRank
 				propertyImages
 				propertyDesc
-				propertyBarter
 				propertyRent
 				memberId
 				soldAt
@@ -283,12 +302,12 @@ export const GET_FAVORITES = gql`
 					memberDesc
 					memberProperties
 					memberArticles
+					memberFollowers
+					memberFollowings
 					memberPoints
 					memberLikes
 					memberViews
 					memberComments
-					memberFollowings
-					memberFollowers
 					memberRank
 					memberWarnings
 					memberBlocks
@@ -311,11 +330,15 @@ export const GET_VISITED = gql`
 			list {
 				_id
 				propertyType
+				propertyAmenities
+				stayDuration
 				propertyStatus
 				propertyLocation
 				propertyAddress
 				propertyTitle
 				propertyPrice
+				propertyDeposite
+				propertyUtilityBills
 				propertySquare
 				propertyBeds
 				propertyRooms
@@ -325,7 +348,6 @@ export const GET_VISITED = gql`
 				propertyRank
 				propertyImages
 				propertyDesc
-				propertyBarter
 				propertyRent
 				memberId
 				soldAt
@@ -346,12 +368,12 @@ export const GET_VISITED = gql`
 					memberDesc
 					memberProperties
 					memberArticles
+					memberFollowers
+					memberFollowings
 					memberPoints
 					memberLikes
 					memberViews
 					memberComments
-					memberFollowings
-					memberFollowers
 					memberRank
 					memberWarnings
 					memberBlocks

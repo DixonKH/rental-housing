@@ -38,7 +38,7 @@ const PropertyList: NextPage = ({ initialInput, ...props }: any) => {
 	const [filterSortName, setFilterSortName] = useState('New');
 
 	/** APOLLO REQUESTS **/
-
+	const [likeTargetProperty] = useMutation(LIKE_TARGET_PROPERTY);
 	const {
 		loading: getPropertiesLoading,
 		data: getPropertiesData,
@@ -70,6 +70,22 @@ const PropertyList: NextPage = ({ initialInput, ...props }: any) => {
 	}, [searchFilter]);
 
 	/** HANDLERS **/
+	const likePropertyHandler = async (user: T, id: string) => {
+		try {
+			if (!id) return;
+			if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
+
+			await likeTargetProperty({ variables: { input: id } });
+
+			await getPropertiesRefetch({ input: initialInput });
+
+			await sweetTopSmallSuccessAlert('success', 800);
+		} catch (err: any) {
+			console.log('ERROR: likePropertyHandler', err.message);
+			sweetMixinErrorAlert(err.message).then();
+		}
+	};
+
 	const handlePaginationChange = async (event: ChangeEvent<unknown>, value: number) => {
 		searchFilter.page = value;
 		await router.push(
@@ -164,7 +180,7 @@ const PropertyList: NextPage = ({ initialInput, ...props }: any) => {
 									</div>
 								) : (
 									properties.map((property: Property) => {
-										return <PropertyCard property={property} key={property?._id} />;
+										return <PropertyCard likePropertyHandler={likePropertyHandler} property={property} key={property?._id} />;
 									})
 								)}
 							</Stack>

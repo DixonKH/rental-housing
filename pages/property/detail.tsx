@@ -99,17 +99,6 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 										<Typography className={'city'}>{property?.propertyLocation}</Typography>
 										<Stack className={'divider'}></Stack>
 										<Stack className={'buy-rent-box'}>
-											{property?.propertyBarter && (
-												<>
-													<Stack className={'circle'}>
-														<svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
-															<circle cx="3" cy="3" r="3" fill="#EB6753" />
-														</svg>
-													</Stack>
-													<Typography className={'buy-rent'}>Barter</Typography>
-												</>
-											)}
-
 											{property?.propertyRent && (
 												<>
 													<Stack className={'circle'}>
@@ -319,9 +308,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 												</Box>
 												<Box component={'div'} className={'info'}>
 													<Typography className={'title'}>Property Options</Typography>
-													<Typography className={'data'}>
-														For {property?.propertyBarter && 'Barter'} {property?.propertyRent && 'Rent'}
-													</Typography>
+													<Typography className={'data'}>For {property?.propertyRent && 'Rent'}</Typography>
 												</Box>
 											</Stack>
 										</Stack>

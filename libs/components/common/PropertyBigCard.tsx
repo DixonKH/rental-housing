@@ -64,10 +64,7 @@ const PropertyBigCard = (props: PropertyBigCardProps) => {
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
 					<div className={'bott'}>
-						<div>
-							{property?.propertyRent ? <p>Rent</p> : <span>Rent</span>}
-							{property?.propertyBarter ? <p>Barter</p> : <span>Barter</span>}
-						</div>
+						<div>{property?.propertyRent ? <p>Rent</p> : <span>Rent</span>}</div>
 						<div className="buttons-box">
 							<IconButton color={'default'}>
 								<RemoveRedEyeIcon />
@@ -75,7 +72,7 @@ const PropertyBigCard = (props: PropertyBigCardProps) => {
 							<Typography className="view-cnt">{property?.propertyViews}</Typography>
 							<IconButton
 								color={'default'}
-								onClick={(e) => {
+								onClick={(e: any) => {
 									e.stopPropagation();
 								}}
 							>
