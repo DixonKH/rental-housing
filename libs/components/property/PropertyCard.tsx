@@ -13,6 +13,9 @@ import { useReactiveVar } from '@apollo/client';
 import { userVar } from '../../../apollo/store';
 import IconButton from '@mui/material/IconButton';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import { Carousel } from '@mantine/carousel';
+import '@mantine/carousel/styles.css';
+import classes from '../../../scss/Carusel.module.css';
 
 interface PropertyCardType {
 	property: Property;
@@ -35,31 +38,31 @@ const PropertyCard = (props: PropertyCardType) => {
 		return (
 			<Stack className="card-config">
 				<Stack className="top">
-					<Link
-						href={{
-							pathname: '/property/detail',
-							query: { id: property?._id },
+					<Carousel
+						withIndicators
+						height={240}
+						classNames={{
+							root: classes.carousel,
+							controls: classes.carouselControls,
+							indicator: classes.carouselIndicator,
 						}}
 					>
-						{/* <img src={imagePath} alt="" /> */}
-						<Swiper
-							className={'top-agents-swiper'}
-							slidesPerView={'auto'}
-							navigation={true}
-							pagination={true}
-							mousewheel={true}
-							modules={[Navigation, Pagination, Mousewheel]}
-						>
-							{property.propertyImages.map((image: string, index: number) => {
-								const imagePath = `${REACT_APP_API_URL}/${image}`;
-								return (
-									<SwiperSlide className={'top-agents-slide'} key={index}>
+						{property.propertyImages.map((image, index) => {
+							const imagePath = `${REACT_APP_API_URL}/${image}`;
+							return (
+								<Carousel.Slide key={index}>
+									<Link
+										href={{
+											pathname: '/property/detail',
+											query: { id: property?._id },
+										}}
+									>
 										<img src={imagePath} alt={property?.propertyTitle} />
-									</SwiperSlide>
-								);
-							})}
-						</Swiper>
-					</Link>
+									</Link>
+								</Carousel.Slide>
+							);
+						})}
+					</Carousel>
 					{property && property?.propertyRank > 0 && (
 						<Box component={'div'} className={'top-badge'}>
 							<img src="/img/icons/electricity.svg" alt="" />

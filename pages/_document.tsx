@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document';
+import { ColorSchemeScript } from '@mantine/core';
 
 export default function Document() {
 	return (
@@ -17,6 +18,7 @@ export default function Document() {
 						'대한민국 언제 어디서나 부동산을 사고팔 수 있습니다. Nestar.uz에서 최적의 가격으로 최고의 부동산을 만나보세요'
 					}
 				/>
+				<ColorSchemeScript defaultColorScheme="auto" />
 			</Head>
 			<body>
 				<Main />
