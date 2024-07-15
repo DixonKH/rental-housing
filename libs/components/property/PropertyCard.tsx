@@ -6,8 +6,6 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Property } from '../../types/property/property';
 import Link from 'next/link';
 import { formatterStr } from '../../utils';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper';
 import { REACT_APP_API_URL } from '../../config';
 import { useReactiveVar } from '@apollo/client';
 import { userVar } from '../../../apollo/store';
@@ -28,9 +26,6 @@ const PropertyCard = (props: PropertyCardType) => {
 	const { property, likePropertyHandler, myFavorites, recentlyVisited } = props;
 	const device = useDeviceDetect();
 	const user = useReactiveVar(userVar);
-	// const imagePath: string = property?.propertyImages[0]
-	// 	? `${REACT_APP_API_URL}/${property?.propertyImages[0]}`
-	// 	: '/img/banner/header1.svg';
 
 	if (device === 'mobile') {
 		return <div>PROPERTY CARD</div>;
@@ -93,6 +88,7 @@ const PropertyCard = (props: PropertyCardType) => {
 							>
 								<Typography>{property.propertyTitle}</Typography>
 							</Link>
+							<Box className="price">${formatterStr(property.propertyPrice)}</Box>
 						</Stack>
 						<Stack className="address">
 							<Typography>

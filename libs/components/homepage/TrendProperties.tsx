@@ -14,6 +14,10 @@ import { T } from '../../types/common';
 import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../sweetAlert';
 import { LIKE_TARGET_PROPERTY } from '../../../apollo/user/mutation';
 import { Message } from '../../enums/common.enum';
+import property from '../../../pages/property';
+import { Carousel } from '@mantine/carousel';
+import '@mantine/carousel/styles.css';
+import classes from '../../../scss/Carusel.module.css';
 
 interface TrendPropertiesProps {
 	initialInput: PropertiesInquiry;

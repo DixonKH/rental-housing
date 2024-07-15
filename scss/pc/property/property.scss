@@ -406,16 +406,6 @@
 								a {
 									height: 100%;
 								}
-								.top-agents-swiper {
-									width: 100%;
-									height: 240px;
-									img {
-										width: 100%;
-										height: 100%;
-										object-fit: cover;
-										border-radius: 12px 12px 0 0;
-									}
-								}
 								img {
 									width: 100%;
 									height: 100%;
@@ -499,6 +489,10 @@
 										width: 100%;
 										height: 23px;
 										overflow: hidden;
+										display: flex;
+										flex-direction: row;
+										align-items: center;
+										justify-content: space-between;
 										p {
 											color: #181a20;
 											font-family: $font;
@@ -507,6 +501,15 @@
 											font-weight: 600;
 											line-height: normal;
 											text-transform: capitalize;
+										}
+										.price {
+											color: #34cc99;
+											font-family: $font;
+											font-size: 17px;
+											font-style: normal;
+											font-weight: 800;
+											line-height: normal;
+											margin-left: 5px;
 										}
 									}
 									.address {
