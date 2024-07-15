@@ -341,15 +341,27 @@
 				}
 			}
 			.right {
-				position: absolute;
-				right: 0;
-				top: 11%;
+				margin-top: 20px;
+				width: 100%;
 				display: flex;
 				flex-direction: row;
 				align-items: center;
-				z-index: 2;
+				justify-content: flex-end;
+				.right-box {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					span {
+						font-family: $font;
+						font-size: 17px;
+						font-style: normal;
+						font-weight: 700;
+						line-height: 26px;
+						color: #ec6c1e;
+					}
+				}
 				button {
-					margin-left: 10px;
+					margin-left: 7px;
 					color: #181a20;
 					font-family: $font;
 					font-size: 14px;
@@ -365,7 +377,7 @@
 				position: relative;
 				width: 100%;
 				flex-direction: row;
-				padding-top: 96px;
+				padding-top: 30px;
 				.main-config {
 					width: 100%;
 					display: flex;
@@ -425,17 +437,33 @@
 										height: 16px;
 									}
 								}
-								.price-box {
+								.like-btn {
+									position: absolute;
+									top: 15px;
+									right: 15px;
+									display: flex;
+									align-items: center;
+									justify-content: center;
+									width: 34px;
+									height: 31px;
+									border-radius: 50%;
+									background: #fff;
+									cursor: pointer;
+									svg {
+										font-size: 18px;
+									}
+								}
+								.property-type {
 									position: absolute;
 									bottom: 20px;
-									left: 20px;
-									padding: 8px 15px;
+									left: 0px;
+									padding: 7px 10px;
 									align-items: center;
-									border-radius: 6px;
-									border: 1px solid rgba(255, 255, 255, 0.5);
-									background: #fff;
+									border-top-right-radius: 6px;
+									border-bottom-right-radius: 6px;
+									background: #ec6c1e;
 									p {
-										color: #181a20;
+										color: #fff;
 										font-family: $font;
 										font-size: 15px;
 										font-style: normal;
@@ -447,12 +475,14 @@
 							.bottom {
 								width: 100%;
 								height: 173px;
-								padding: 20px 16px 10px 16px;
+								padding: 12px 16px 10px 16px;
+
 								.name-address {
 									width: 100%;
-									height: 48px;
-									gap: 5px;
-									margin-bottom: 20px;
+									height: 62px;
+									gap: 4px;
+									margin-bottom: 15px;
+
 									.name {
 										width: 100%;
 										height: 23px;
@@ -470,6 +500,11 @@
 									.address {
 										width: 100%;
 										overflow: hidden;
+										img {
+											width: 16px;
+											height: 16px;
+											margin-right: 2px;
+										}
 										p {
 											color: #717171;
 											font-family: $font;
@@ -485,7 +520,7 @@
 									width: 100%;
 									height: 20px;
 									gap: 20px;
-									margin-bottom: 10px;
+									margin-bottom: 15px;
 									.option {
 										flex-direction: row;
 										gap: 5px;
@@ -504,10 +539,11 @@
 									width: 100%;
 									height: 1px;
 									background: #ddd;
-									margin-bottom: 17px;
+									margin-bottom: 15px;
 								}
 								.type-buttons {
 									flex-direction: row;
+									height: 20px;
 									width: 100%;
 									justify-content: space-between;
 									align-items: center;
@@ -515,6 +551,46 @@
 										flex-direction: row;
 										align-items: center;
 										gap: 7px;
+										.aviable-option {
+											display: flex;
+											flex-direction: row;
+											align-items: center;
+											gap: 4px;
+											div {
+												width: 10px;
+												height: 10px;
+												border-radius: 50%;
+												background: #34cc99;
+											}
+											p {
+												font-size: 15px;
+												color: #181a20;
+												font-family: $font;
+												font-style: normal;
+												line-height: normal;
+												font-weight: 600;
+											}
+										}
+										.disable-option {
+											display: flex;
+											flex-direction: row;
+											align-items: center;
+											gap: 4px;
+											div {
+												width: 10px;
+												height: 10px;
+												border-radius: 50%;
+												background: #ee5354;
+											}
+											p {
+												font-size: 15px;
+												color: #181a20;
+												font-family: $font;
+												font-style: normal;
+												line-height: normal;
+												font-weight: 600;
+											}
+										}
 										p {
 											color: #181a20;
 											font-family: $font;
@@ -547,6 +623,7 @@
 						}
 					}
 					.pagination-config {
+						margin-top: 15px;
 						width: 442px;
 						height: 86px;
 						align-items: center;
@@ -572,17 +649,20 @@
 		}
 		.community-board {
 			position: relative;
-			padding: 124px 0px 61px;
+			padding: 10px 0px 10px;
 			width: 100%;
-			height: 860px;
+			height: 760px;
 			display: flex;
 			flex-direction: row;
 			.container {
 				flex-direction: column;
 				align-items: center;
+				.comminity-name {
+					font-family: $font;
+				}
 				.community-main {
 					width: 100%;
-					margin-top: 60px;
+					margin-top: 50px;
 					display: flex;
 					flex-direction: row;
 					justify-content: space-between;

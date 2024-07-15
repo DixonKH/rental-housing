@@ -137,38 +137,40 @@ const PropertyList: NextPage = ({ initialInput, ...props }: any) => {
 						<Filter searchFilter={searchFilter} setSearchFilter={setSearchFilter} initialInput={initialInput} />
 					</Stack>
 					<Box component={'div'} className={'right'}>
-						<span>Sort by</span>
-						<div>
-							<Button onClick={sortingClickHandler} endIcon={<KeyboardArrowDownRoundedIcon />}>
-								{filterSortName}
-							</Button>
-							<Menu anchorEl={anchorEl} open={sortingOpen} onClose={sortingCloseHandler} sx={{ paddingTop: '5px' }}>
-								<MenuItem
-									onClick={sortingHandler}
-									id={'new'}
-									disableRipple
-									sx={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px' }}
-								>
-									New
-								</MenuItem>
-								<MenuItem
-									onClick={sortingHandler}
-									id={'lowest'}
-									disableRipple
-									sx={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px' }}
-								>
-									Lowest Price
-								</MenuItem>
-								<MenuItem
-									onClick={sortingHandler}
-									id={'highest'}
-									disableRipple
-									sx={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px' }}
-								>
-									Highest Price
-								</MenuItem>
-							</Menu>
-						</div>
+						<Stack className="right-box">
+							<span>Sort by</span>
+							<div>
+								<Button onClick={sortingClickHandler} endIcon={<KeyboardArrowDownRoundedIcon />}>
+									{filterSortName}
+								</Button>
+								<Menu anchorEl={anchorEl} open={sortingOpen} onClose={sortingCloseHandler} sx={{ paddingTop: '5px' }}>
+									<MenuItem
+										onClick={sortingHandler}
+										id={'new'}
+										disableRipple
+										sx={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px' }}
+									>
+										New
+									</MenuItem>
+									<MenuItem
+										onClick={sortingHandler}
+										id={'lowest'}
+										disableRipple
+										sx={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px' }}
+									>
+										Lowest Price
+									</MenuItem>
+									<MenuItem
+										onClick={sortingHandler}
+										id={'highest'}
+										disableRipple
+										sx={{ boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px' }}
+									>
+										Highest Price
+									</MenuItem>
+								</Menu>
+							</div>
+						</Stack>
 					</Box>
 					<Stack className={'property-page'}>
 						<Stack className="main-config" mb={'76px'}>
@@ -180,7 +182,9 @@ const PropertyList: NextPage = ({ initialInput, ...props }: any) => {
 									</div>
 								) : (
 									properties.map((property: Property) => {
-										return <PropertyCard likePropertyHandler={likePropertyHandler} property={property} key={property?._id} />;
+										return (
+											<PropertyCard likePropertyHandler={likePropertyHandler} property={property} key={property?._id} />
+										);
 									})
 								)}
 							</Stack>

@@ -47,8 +47,17 @@ const PropertyCard = (props: PropertyCardType) => {
 							<Typography>TOP</Typography>
 						</Box>
 					)}
-					<Box component={'div'} className={'price-box'}>
-						<Typography>${formatterStr(property?.propertyPrice)}</Typography>
+					<IconButton className="like-btn" color={'default'} onClick={() => likePropertyHandler(user, property?._id)}>
+						{myFavorites ? (
+							<FavoriteIcon color="primary" />
+						) : property?.meLiked && property?.meLiked[0]?.myFavorite ? (
+							<FavoriteIcon color="primary" />
+						) : (
+							<FavoriteBorderIcon />
+						)}
+					</IconButton>
+					<Box component={'div'} className={'property-type'}>
+						<Typography>{property?.propertyType}</Typography>
 					</Box>
 				</Stack>
 				<Stack className="bottom">
@@ -65,6 +74,7 @@ const PropertyCard = (props: PropertyCardType) => {
 						</Stack>
 						<Stack className="address">
 							<Typography>
+								<img src="/img/icons/location.svg" />
 								{property.propertyAddress}, {property.propertyLocation}
 							</Typography>
 						</Stack>
@@ -83,12 +93,17 @@ const PropertyCard = (props: PropertyCardType) => {
 					<Stack className="divider"></Stack>
 					<Stack className="type-buttons">
 						<Stack className="type">
-							<Typography
-								sx={{ fontWeight: 500, fontSize: '13px' }}
-								className={property.propertyRent ? '' : 'disabled-type'}
-							>
-								Rent
-							</Typography>
+							{property.propertyStatus === 'ACTIVE' ? (
+								<Stack className="aviable-option">
+									<div></div>
+									<p>Aviable now</p>
+								</Stack>
+							) : (
+								<Stack className="disable-option">
+									<div></div>
+									<p>not Aviable</p>
+								</Stack>
+							)}
 						</Stack>
 						{!recentlyVisited && (
 							<Stack className="buttons">
@@ -96,16 +111,6 @@ const PropertyCard = (props: PropertyCardType) => {
 									<RemoveRedEyeIcon />
 								</IconButton>
 								<Typography className="view-cnt">{property?.propertyViews}</Typography>
-								<IconButton color={'default'} onClick={() => likePropertyHandler(user, property?._id)}>
-									{myFavorites ? (
-										<FavoriteIcon color="primary" />
-									) : property?.meLiked && property?.meLiked[0]?.myFavorite ? (
-										<FavoriteIcon color="primary" />
-									) : (
-										<FavoriteBorderIcon />
-									)}
-								</IconButton>
-								<Typography className="view-cnt">{property?.propertyLikes}</Typography>
 							</Stack>
 						)}
 					</Stack>
