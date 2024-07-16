@@ -2,6 +2,7 @@ import { Container, Stack } from '@mui/material';
 import { useCallback, useRef, useState } from 'react';
 import { PropertyLocation } from '../../enums/property.enum';
 import { PropertiesInquiry } from '../../types/property/property.input';
+import Link from 'next/link';
 
 interface HeaderFilterProps {
 	initialInput: PropertiesInquiry;
@@ -47,10 +48,12 @@ const PropertyLocationLists = (props: HeaderFilterProps) => {
 				<div className={`location-cards ${openLocation ? 'on' : ''}`} ref={locationRef}>
 					{propertyLocation.map((location: string) => {
 						return (
-							<div onClick={() => propertyLocationSelectHandler(location)} key={location}>
-								<img src={`img/banner/cities/${location}.webp`} alt="" />
-								<span>{location}</span>
-							</div>
+							<Link href={{ pathname: '/property' }}>
+								<div onClick={() => propertyLocationSelectHandler(location)} key={location}>
+									<img src={`img/banner/cities/${location}.webp`} alt="" />
+									<span>{location}</span>
+								</div>
+							</Link>
 						);
 					})}
 				</div>
