@@ -124,16 +124,18 @@ const withLayoutBasic = (Component: any) => {
 							<Top />
 						</Stack>
 
-						<Stack className={`header-basic ${authHeader && 'auth'}`}>
-							<Stack className={'container'}>
-								<strong>{t(memoizedValues.title)}</strong>
-								<span>{t(memoizedValues.desc)}</span>
+						<div className="header-wrap">
+							<Stack className={`header-basic ${authHeader && 'auth'}`}>
+								<Stack className={'container'}>
+									<strong>{t(memoizedValues.title)}</strong>
+									<span>{t(memoizedValues.desc)}</span>
+								</Stack>
+								<Stack className="container-img">
+									<img src={memoizedValues.bgImage} alt="" />
+									<img className="img-2" src="/img/banner/locationFilterImg.svg" alt="" />
+								</Stack>
 							</Stack>
-							<Stack className="container-img">
-								<img src={memoizedValues.bgImage} alt="" />
-								<img className="img-2" src="/img/banner/locationFilterImg.svg" alt="" />
-							</Stack>
-						</Stack>
+						</div>
 
 						<Stack id={'main'}>
 							<Component {...props} />

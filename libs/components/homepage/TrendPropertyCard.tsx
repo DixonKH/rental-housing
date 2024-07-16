@@ -14,7 +14,6 @@ import { Carousel } from '@mantine/carousel';
 import '@mantine/carousel/styles.css';
 import classes from '../../../scss/Carusel.module.css';
 import Link from 'next/link';
-import { Image } from '@mantine/core';
 
 interface TrendPropertyCardProps {
 	property: Property;

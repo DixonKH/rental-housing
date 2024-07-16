@@ -8,6 +8,11 @@ import { REACT_APP_API_URL } from '../../config';
 import { useRouter } from 'next/router';
 import { useReactiveVar } from '@apollo/client';
 import { userVar } from '../../../apollo/store';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { Carousel } from '@mantine/carousel';
+import '@mantine/carousel/styles.css';
+import classes from '../../../scss/Carusel.module.css';
+import Link from 'next/link';
 
 interface PopularPropertyCardProps {
 	property: Property;
@@ -73,24 +78,40 @@ const PopularPropertyCard = (props: PopularPropertyCardProps) => {
 	} else {
 		return (
 			<Stack className="popular-card-box">
-				<Box
-					component={'div'}
-					className={'card-img'}
-					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${property?.propertyImages[0]})` }}
-				>
-					{property?.propertyRank && property?.propertyRank >= 50 ? (
-						<div className={'status'}>
-							<img src="/img/icons/electricity.svg" alt="" />
-							<span>top</span>
-						</div>
-					) : (
-						''
-					)}
-
-					<div className={'price'}>${property.propertyPrice}</div>
-				</Box>
+				<Stack>
+					<Carousel
+						withIndicators
+						height={203}
+						classNames={{
+							root: classes.carousel,
+							controls: classes.carouselControls,
+							indicator: classes.carouselIndicator,
+						}}
+						className="carousel"
+					>
+						{property?.propertyImages.map((image, index) => {
+							const imagePath = `${REACT_APP_API_URL}/${image}`;
+							return (
+								<Carousel.Slide key={index}>
+									<Link
+										href={{
+											pathname: '/property/detail',
+											query: { id: property?._id },
+										}}
+									>
+										<img src={imagePath} alt={property?.propertyTitle} />
+									</Link>
+								</Carousel.Slide>
+							);
+						})}
+					</Carousel>
+				</Stack>
+				<Box className="property-type">{property.propertyType}</Box>
 				<Box component={'div'} className={'info'}>
-					<strong className={'title'}>{property.propertyTitle}</strong>
+					<Box className={'title'}>
+						<strong>{property.propertyTitle}</strong>
+						<p>${property.propertyPrice}</p>
+					</Box>
 					<p className={'desc'}>{property.propertyAddress}</p>
 					<div className={'options'}>
 						<div>

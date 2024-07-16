@@ -11,6 +11,7 @@ import { AgentsInquiry } from '../../types/member/member.input';
 import { useQuery } from '@apollo/client';
 import { GET_AGENTS } from '../../../apollo/user/query';
 import { T } from '../../types/common';
+import Link from 'next/link';
 
 interface TopAgentsProps {
 	initialInput: AgentsInquiry;
@@ -75,10 +76,15 @@ const TopAgents = (props: TopAgentsProps) => {
 							<p>Our Top Agents always ready to serve you</p>
 						</Box>
 						<Box component={'div'} className={'right'}>
-							<div className={'more-box'}>
+							<Link
+								href={{
+									pathname: '/agent',
+								}}
+								className={'more-box'}
+							>
 								<span>See All Agents</span>
 								<img src="/img/icons/rightup.svg" alt="" />
-							</div>
+							</Link>
 						</Box>
 					</Stack>
 					<Stack className={'wrapper'}>
