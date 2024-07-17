@@ -54,11 +54,13 @@ const withLayoutBasic = (Component: any) => {
 					title = 'Community';
 					desc = 'Home / For Rent';
 					bgImage = '/img/banner/header2.svg';
+					setAuthHeader(true);
 					break;
 				case '/community/detail':
 					title = 'Community Detail';
 					desc = 'Home / For Rent';
 					bgImage = '/img/banner/header2.svg';
+					setAuthHeader(true);
 					break;
 				case '/cs':
 					title = 'CS';

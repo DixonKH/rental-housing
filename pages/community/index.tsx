@@ -11,6 +11,7 @@ import { T } from '../../libs/types/common';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { BoardArticlesInquiry } from '../../libs/types/board-article/board-article.input';
 import { BoardArticleCategory } from '../../libs/enums/board-article.enum';
+import EastIcon from '@mui/icons-material/East';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -68,6 +69,25 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 		return (
 			<div id="community-list-page">
 				<div className="container">
+					<Stack className="community-header">
+						<Stack>
+							<img src="/img/banner/community.png" alt="" />
+						</Stack>
+						<Stack className="community-main">
+							<strong>Activate a live connection with the largest pool of student tenants in the South Korea</strong>
+
+							<ul>
+								<li>Easily establish a live feed of properties to the student accommodation website</li>
+								<li>Unlimited properties for just $150 (plus VAT) per city per month</li>
+								<li>Onboarding support via our dedicated customer success team</li>
+								<li>Manual property upload available for $23 per month</li>
+								<li>Enhance your letting profile via our additional marketing opportunities</li>
+							</ul>
+							<Button className="community-btn">
+								Get started now <EastIcon />
+							</Button>
+						</Stack>
+					</Stack>
 					<TabContext value={searchCommunity.search.articleCategory}>
 						<Stack className="main-box">
 							<Stack className="left-config">
