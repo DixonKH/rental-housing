@@ -101,7 +101,7 @@ const Footer = () => {
 								</div>
 							</Box>
 							<Box component={'div'} className={'footer-box'}>
-								<img src="/img/logo/logoText.svg" alt="" className={'logo'} />
+								<img src="/img/logo/logo.png" alt="" className={'logo'} />
 							</Box>
 						</Box>
 						<Box component={'div'} className={'bottom'}>

@@ -37,7 +37,8 @@ const withLayoutBasic = (Component: any) => {
 				case '/agent':
 					title = 'Agents';
 					desc = 'Home / For Rent';
-					bgImage = '/img/banner/agents.webp';
+					bgImage = '/img/banner/agents.jpg';
+					setAuthHeader(true);
 					break;
 				case '/agent/detail':
 					title = 'Agent Page';

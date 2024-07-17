@@ -89,83 +89,101 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 		return <h1>AGENTS PAGE MOBILE</h1>;
 	} else {
 		return (
-			<Stack className={'agent-list-page'}>
-				<Stack className={'container'}>
-					<Stack className={'filter'}>
-						<Box component={'div'} className={'left'}>
-							<input
-								type="text"
-								placeholder={'Search for an agent'}
-								value={searchText}
-								onChange={(e: any) => setSearchText(e.target.value)}
-								onKeyDown={(event: any) => {
-									if (event.key == 'Enter') {
-										setSearchFilter({
-											...searchFilter,
-											search: { ...searchFilter.search, text: searchText },
-										});
-									}
-								}}
-							/>
-						</Box>
-						<Box component={'div'} className={'right'}>
-							<span>Sort by</span>
-							<div>
-								<Button onClick={sortingClickHandler} endIcon={<KeyboardArrowDownRoundedIcon />}>
-									{filterSortName}
-								</Button>
-								<Menu anchorEl={anchorEl} open={sortingOpen} onClose={sortingCloseHandler} sx={{ paddingTop: '5px' }}>
-									<MenuItem onClick={sortingHandler} id={'recent'} disableRipple>
-										Recent
-									</MenuItem>
-									<MenuItem onClick={sortingHandler} id={'old'} disableRipple>
-										Oldest
-									</MenuItem>
-									<MenuItem onClick={sortingHandler} id={'likes'} disableRipple>
-										Likes
-									</MenuItem>
-									<MenuItem onClick={sortingHandler} id={'views'} disableRipple>
-										Views
-									</MenuItem>
-								</Menu>
-							</div>
-						</Box>
+			<>
+				<Stack className={'agent-list-page'}>
+					<Stack className="agent-header">
+						<Stack className="header-adv">
+							<strong>Our best Agents</strong>
+							<p>
+								Advice for students seeking accommodation. Accommodation for Students gets your property seen by the
+								UK’s biggest and most engaged pool of student tenants.
+							</p>
+							<Stack className="header-icon">
+								<img className="image" src="/img/banner/adv.png" alt="/" />
+								<img className="image-icon" src="/img/banner/adv1.png" alt="/" />
+							</Stack>
+						</Stack>
+						<Stack className="header-img">
+							<img src="/img/banner/agents.png" alt="/" />
+						</Stack>
 					</Stack>
-					<Stack className={'card-wrap'}>
-						{agents?.length === 0 ? (
-							<div className={'no-data'}>
-								<img src="/img/icons/icoAlert.svg" alt="" />
-								<p>No Agents found!</p>
-							</div>
-						) : (
-							agents.map((agent: Member) => {
-								return <AgentCard agent={agent} key={agent._id} />;
-							})
-						)}
-					</Stack>
-					<Stack className={'pagination'}>
-						<Stack className="pagination-box">
-							{agents.length !== 0 && Math.ceil(total / searchFilter.limit) > 1 && (
-								<Stack className="pagination-box">
-									<Pagination
-										page={currentPage}
-										count={Math.ceil(total / searchFilter.limit)}
-										onChange={paginationChangeHandler}
-										shape="circular"
-										color="primary"
-									/>
-								</Stack>
+					<Stack className={'container'}>
+						<Stack className={'filter'}>
+							<Box component={'div'} className={'left'}>
+								<input
+									type="text"
+									placeholder={'Search for an agent'}
+									value={searchText}
+									onChange={(e: any) => setSearchText(e.target.value)}
+									onKeyDown={(event: any) => {
+										if (event.key == 'Enter') {
+											setSearchFilter({
+												...searchFilter,
+												search: { ...searchFilter.search, text: searchText },
+											});
+										}
+									}}
+								/>
+							</Box>
+							<Box component={'div'} className={'right'}>
+								<span>Sort by</span>
+								<div>
+									<Button onClick={sortingClickHandler} endIcon={<KeyboardArrowDownRoundedIcon />}>
+										{filterSortName}
+									</Button>
+									<Menu anchorEl={anchorEl} open={sortingOpen} onClose={sortingCloseHandler} sx={{ paddingTop: '5px' }}>
+										<MenuItem onClick={sortingHandler} id={'recent'} disableRipple>
+											Recent
+										</MenuItem>
+										<MenuItem onClick={sortingHandler} id={'old'} disableRipple>
+											Oldest
+										</MenuItem>
+										<MenuItem onClick={sortingHandler} id={'likes'} disableRipple>
+											Likes
+										</MenuItem>
+										<MenuItem onClick={sortingHandler} id={'views'} disableRipple>
+											Views
+										</MenuItem>
+									</Menu>
+								</div>
+							</Box>
+						</Stack>
+						<Stack className={'card-wrap'}>
+							{agents?.length === 0 ? (
+								<div className={'no-data'}>
+									<img src="/img/icons/icoAlert.svg" alt="" />
+									<p>No Agents found!</p>
+								</div>
+							) : (
+								agents.map((agent: Member) => {
+									return <AgentCard agent={agent} key={agent._id} />;
+								})
 							)}
 						</Stack>
+						<Stack className={'pagination'}>
+							<Stack className="pagination-box">
+								{agents.length !== 0 && Math.ceil(total / searchFilter.limit) > 1 && (
+									<Stack className="pagination-box">
+										<Pagination
+											page={currentPage}
+											count={Math.ceil(total / searchFilter.limit)}
+											onChange={paginationChangeHandler}
+											shape="circular"
+											color="primary"
+										/>
+									</Stack>
+								)}
+							</Stack>
 
-						{agents.length !== 0 && (
-							<span>
-								Total {total} agent{total > 1 ? 's' : ''} available
-							</span>
-						)}
+							{agents.length !== 0 && (
+								<span>
+									Total {total} agent{total > 1 ? 's' : ''} available
+								</span>
+							)}
+						</Stack>
 					</Stack>
 				</Stack>
-			</Stack>
+			</>
 		);
 	}
 };
