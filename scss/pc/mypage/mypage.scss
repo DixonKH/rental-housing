@@ -1,13 +1,16 @@
 #pc-wrap {
 	#my-page {
 		background: #f6f6f6;
+		background-image: url('/img/bg.svg');
+		background-repeat: no-repeat;
+		background-position: top 90px right 0px;
 		.container {
 			.my-page {
 				position: relative;
 				width: 100%;
 				flex-direction: row;
 				gap: 25px;
-				padding-top: 96px;
+				padding-top: 120px;
 				.back-frame {
 					width: 1260px;
 					height: auto;
@@ -15,14 +18,13 @@
 					flex-direction: row;
 					margin: 100px 0 200px 0;
 					border-radius: 12px;
-					border: 1px solid #c4c4c4;
 					background: #fff;
 					box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
 					.left-config {
 						position: relative;
 						padding: 0 0 0 0;
 						width: 266px;
-						height: 700px;
+						height: 770px;
 						border-radius: 12px;
 						background: #fff;
 						border: 1px solid rgba(196, 196, 196, 0.79);
@@ -32,11 +34,12 @@
 							margin-top: 5px;
 							position: relative;
 							display: flex;
-							flex-direction: row;
+							flex-direction: column;
+							align-items: center;
 							.profile-img {
 								img {
-									width: 79px;
-									height: 79px;
+									width: 110px;
+									height: 110px;
 									border-radius: 50%;
 									right: 30px;
 									bottom: 12px;
@@ -44,15 +47,16 @@
 								}
 							}
 							.user-info {
-								margin-left: 20px;
 								display: flex;
 								flex-direction: column;
+								align-items: center;
 								.user-name {
+									margin-top: 5px;
 									color: #181a20;
 									font-family: $font;
-									font-size: 15px;
+									font-size: 19px;
 									font-style: normal;
-									font-weight: 600;
+									font-weight: 700;
 									line-height: normal;
 								}
 								.user-phone {
@@ -74,14 +78,14 @@
 						.sections {
 							height: auto;
 							gap: 45px;
-							margin-top: 30px;
+							margin-top: 15px;
 							.section {
 								height: auto;
 								.title {
 									font-family: $font;
 									font-size: 15px;
 									font-style: normal;
-									font-weight: 400;
+									font-weight: 600;
 									line-height: 28px;
 								}
 								.sub-section {
@@ -91,7 +95,7 @@
 									flex-direction: column;
 									align-items: center;
 									cursor: pointer;
-									padding: 0 5px 0 5px;
+									padding: 5px 5px 0 5px;
 									li {
 										height: 33px;
 										margin-bottom: 6px;
@@ -99,7 +103,7 @@
 									}
 									.focus {
 										height: 50px;
-										background: #000000;
+										background: #212138;
 										border-radius: 10px;
 										p {
 											font-size: 14px;

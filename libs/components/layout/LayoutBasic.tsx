@@ -49,6 +49,7 @@ const withLayoutBasic = (Component: any) => {
 					title = 'my page';
 					desc = 'Home / For Rent';
 					bgImage = '/img/banner/header1.svg';
+					setAuthHeader(true);
 					break;
 				case '/community':
 					title = 'Community';

@@ -105,7 +105,7 @@
 						border-radius: 6px;
 						border: 1px solid #181a20;
 						margin-bottom: 10px;
-						color: #181a20;
+						color: #212138;
 						font-family: $font;
 						font-size: 14px;
 						font-style: normal;
@@ -119,7 +119,7 @@
 						padding: 0;
 						justify-content: center;
 						align-items: center;
-						background-color: #000000;
+						background-color: #212138;
 						color: #ffffff;
 						border-radius: 6px;
 						margin-bottom: 10px;
@@ -150,16 +150,16 @@
 								.title {
 									color: #000;
 									font-family: $font;
-									font-size: 24px;
+									font-size: 25px;
 									font-style: normal;
-									font-weight: 600;
+									font-weight: 700;
 									line-height: normal;
 									letter-spacing: 0.24px;
 								}
 								.sub-title {
 									color: #757575;
 									font-family: $font;
-									font-size: 13px;
+									font-size: 14px;
 									font-style: normal;
 									font-weight: 700;
 									line-height: normal;
@@ -167,17 +167,22 @@
 								}
 							}
 							.right {
-								width: 91px;
-								height: 32px;
-								border-radius: 4px;
-								background: #eb6753;
+								width: 150px;
+								height: 40px;
+								border-radius: 20px;
+								background: #ec6c1e;
 								color: #fff;
 								font-family: $font;
-								font-size: 13px;
+								font-size: 15px;
 								font-style: normal;
-								font-weight: 500;
+								font-weight: 600;
 								line-height: normal;
 								letter-spacing: 0.39px;
+								svg {
+									width: 20px;
+									height: 20px;
+									margin-left: 5px;
+								}
 							}
 						}
 						.list-box {
@@ -186,6 +191,9 @@
 							flex-direction: row;
 							flex-wrap: wrap;
 							gap: 30px;
+							.desc {
+								font-size: 16px;
+							}
 						}
 					}
 				}
