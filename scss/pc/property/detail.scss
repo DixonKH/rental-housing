@@ -77,12 +77,13 @@
 							width: auto;
 							height: auto;
 							flex-direction: row;
-							gap: 15px;
+							gap: 10px;
 							.option {
-								width: auto;
+								display: flex;
+								width: 90px;
 								height: auto;
 								flex-direction: row;
-								gap: 8px;
+								gap: 7px;
 								p {
 									color: #181a20;
 									font-family: $font;
@@ -189,9 +190,11 @@
 				}
 			}
 			.property-desc-config {
+				position: relative;
 				width: 100%;
 				height: auto;
 				flex-direction: row;
+				justify-content: center;
 				gap: 22px;
 				.left-config {
 					width: 960px;
@@ -206,17 +209,19 @@
 							width: auto;
 							height: auto;
 							flex-direction: row;
-							gap: 17px;
+							gap: 15px;
 							.svg-box {
 								width: 56px;
 								height: 50px;
 								align-items: center;
 								justify-content: center;
 								border-radius: 12px;
-								border: 1px solid #ddd;
+								border: 2px solid #ec6c1e;
 								img {
 									width: 35px;
 									height: auto;
+									color: #ec6c1e;
+									cursor: pointer;
 								}
 							}
 							.option-includes {
@@ -251,21 +256,21 @@
 						.top {
 							width: 100%;
 							height: auto;
-							gap: 30px;
+							gap: 20px;
 							.title {
-								color: #181a20;
+								color: #ec6c1e;
 								font-family: $font;
-								font-size: 17px;
+								font-size: 22px;
 								font-style: normal;
-								font-weight: 600;
+								font-weight: 700;
 								line-height: normal;
 							}
 							.desc {
 								color: #181a20;
 								font-family: $font;
-								font-size: 14px;
+								font-size: 16px;
 								font-style: normal;
-								font-weight: 400;
+								font-weight: 500;
 								line-height: 26px;
 								max-height: 104px;
 							}
@@ -273,13 +278,13 @@
 						.bottom {
 							width: 100%;
 							height: auto;
-							gap: 30px;
+							gap: 20px;
 							.title {
-								color: #181a20;
+								color: #ec6c1e;
 								font-family: $font;
-								font-size: 17px;
+								font-size: 22px;
 								font-style: normal;
-								font-weight: 600;
+								font-weight: 700;
 								line-height: normal;
 							}
 							.info-box {
@@ -299,19 +304,130 @@
 											width: 121px;
 											color: #181a20;
 											font-family: $font;
-											font-size: 14px;
+											font-size: 16px;
 											font-style: normal;
-											font-weight: 600;
+											font-weight: 500;
 											line-height: 35px;
 										}
 										.data {
 											width: 88px;
 											color: #181a20;
 											font-family: $font;
-											font-size: 14px;
+											font-size: 14.5px;
 											font-style: normal;
 											font-weight: 400;
 											line-height: 35px;
+										}
+									}
+								}
+							}
+						}
+						.bottom-next {
+							width: 80%;
+							display: flex;
+							flex-direction: column;
+							.header {
+								display: flex;
+								flex-direction: row;
+								align-items: center;
+								justify-content: space-between;
+								.title {
+									color: #ec6c1e;
+									font-family: $font;
+									font-size: 22px;
+									font-style: normal;
+									font-weight: 700;
+									line-height: normal;
+								}
+								.title-2 {
+									color: #ec6c1e;
+									font-family: $font;
+									font-size: 22px;
+									font-style: normal;
+									font-weight: 700;
+									line-height: normal;
+									margin-right: 40px;
+								}
+							}
+							.info-container {
+								width: 100%;
+								display: flex;
+								flex-direction: row;
+								align-items: flex-start;
+								justify-content: space-between;
+								.info-box {
+									margin-top: 7px;
+									width: 100%;
+									height: auto;
+									display: flex;
+									flex-direction: row;
+									padding-left: 20px;
+									.amenity-img {
+										width: 50px;
+										height: auto;
+										display: flex;
+										flex-direction: column;
+										gap: 4px;
+										img {
+											width: 24px;
+											height: 24px;
+											margin-top: 10px;
+										}
+									}
+									.amenities {
+										width: 50px;
+										height: auto;
+										display: flex;
+										flex-direction: column;
+										gap: 4px;
+										.amenity-text {
+											width: 100%;
+											height: auto;
+											color: #181a20;
+											font-family: $font;
+											font-size: 14px;
+											font-style: normal;
+											font-weight: 400;
+											line-height: 26px;
+											margin-top: 8px;
+										}
+									}
+								}
+								.info-right {
+									margin-top: 7px;
+									width: 30%;
+									height: auto;
+									display: flex;
+									flex-direction: row;
+									justify-content: flex-end;
+									.utility-img {
+										width: 50px;
+										height: auto;
+										display: flex;
+										flex-direction: column;
+										gap: 4px;
+										img {
+											width: 24px;
+											height: 24px;
+											margin-top: 10px;
+										}
+									}
+									.utility-box {
+										width: 100%;
+										height: auto;
+										display: flex;
+										flex-direction: column;
+										gap: 4px;
+										.utility-text {
+											width: 100%;
+											height: auto;
+											color: #181a20;
+											font-family: $font;
+											font-size: 14px;
+											font-style: normal;
+											font-weight: 400;
+											line-height: 26px;
+											margin-top: 9px;
 										}
 									}
 								}
@@ -326,21 +442,21 @@
 						border-radius: 12px;
 						border: 1px solid #c4c4c4;
 						.title {
-							color: #181a20;
+							color: #ec6c1e;
 							font-family: $font;
-							font-size: 17px;
+							font-size: 21px;
 							font-style: normal;
-							font-weight: 600;
+							font-weight: 700;
 							line-height: normal;
 						}
 						.image-box {
 							width: 100%;
-							height: 510px;
+							height: 600px;
 							border: 1px solid #c4c4c4;
 							img {
 								width: 100%;
 								height: 100%;
-								object-fit: cover;
+								object-fit: initial;
 							}
 						}
 					}
@@ -689,17 +805,101 @@
 							justify-content: center;
 							align-items: center;
 							gap: 10px;
-							border-radius: 12px;
-							background: #eb6753;
+							border-radius: 42px;
+							background: #ec6c1e;
 							.title {
 								color: #fff;
 								font-family: $font;
-								font-size: 15px;
+								font-size: 16px;
 								font-style: normal;
 								font-weight: 600;
 								line-height: normal;
 							}
 						}
+					}
+				}
+				.box-option {
+					margin-top: 40px;
+					position: sticky;
+					z-index: 9;
+					top: 120px;
+					left: 0;
+					width: 318px;
+					height: 360px;
+					display: flex;
+					height: fit-content;
+					padding: 30px 25px;
+					gap: 20px;
+					border-radius: 12px;
+					border: 1px solid rgba(196, 196, 196, 0.79);
+					background: #fff;
+					box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+					.price {
+						font-weight: 500;
+						span {
+							font-size: 27px;
+							font-weight: 900;
+							color: #363443;
+						}
+					}
+					.deposite {
+						color: #363443;
+						font-family: $font;
+						font-size: 17px;
+						font-style: normal;
+						font-weight: 600;
+						margin-bottom: 10px;
+						text-decoration: underline;
+					}
+					.bill-text {
+						margin: 0;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						width: 140px;
+						height: 34px;
+						border: 1px solid #aca4a4;
+						border-radius: 5px;
+						img {
+							width: 18px;
+							height: 18px;
+						}
+					}
+					.bills {
+						display: flex;
+						flex-direction: row;
+						font-size: 14px;
+						color: #777584;
+						font-weight: 600;
+						.bill {
+							padding-right: 3px;
+						}
+					}
+					.rooms-btn {
+						width: 100%;
+						padding: 17px 30px;
+						border-radius: 42px;
+						background: #ec6c1e;
+						color: #fff;
+						font-family: $font;
+						font-size: 15px;
+						font-style: normal;
+						font-weight: 700;
+						line-height: normal;
+						text-transform: uppercase;
+					}
+					.enquiry-btn {
+						width: 100%;
+						padding: 17px 30px;
+						border-radius: 42px;
+						color: #181a20;
+						border: 1.5px solid #181a20;
+						font-family: $font;
+						font-size: 15px;
+						font-style: normal;
+						font-weight: 700;
+						line-height: normal;
+						text-transform: uppercase;
 					}
 				}
 			}
