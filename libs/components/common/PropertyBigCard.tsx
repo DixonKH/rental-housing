@@ -10,6 +10,10 @@ import { useReactiveVar } from '@apollo/client';
 import { userVar } from '../../../apollo/store';
 import { useRouter } from 'next/router';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import { Carousel } from '@mantine/carousel';
+import '@mantine/carousel/styles.css';
+import classes from '../../../scss/Carusel.module.css';
+import Link from 'next/link';
 
 interface PropertyBigCardProps {
 	property: Property;
@@ -22,32 +26,60 @@ const PropertyBigCard = (props: PropertyBigCardProps) => {
 	const user = useReactiveVar(userVar);
 	const router = useRouter();
 
-	/** HANDLERS **/
-	const goPropertyDetatilPage = (propertyId: string) => {
-		router.push(`/property/detail?id=${propertyId}`);
-	};
-
 	if (device === 'mobile') {
 		return <div>APARTMEND BIG CARD</div>;
 	} else {
 		return (
-			<Stack className="property-big-card-box" onClick={() => goPropertyDetatilPage(property?._id)}>
-				<Box
-					component={'div'}
-					className={'card-img'}
-					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${property?.propertyImages?.[0]})` }}
-				>
+			<Stack className="property-big-card-box">
+				<Stack>
+					<Carousel
+						withIndicators
+						height={250}
+						classNames={{
+							root: classes.carousel,
+							controls: classes.carouselControls,
+							indicator: classes.carouselIndicator,
+						}}
+						className="carousel"
+					>
+						{property?.propertyImages.map((image, index) => {
+							const imagePath = `${REACT_APP_API_URL}/${image}`;
+							return (
+								<Carousel.Slide key={index}>
+									<Link
+										href={{
+											pathname: '/property/detail',
+											query: { id: property?._id },
+										}}
+									>
+										<img src={imagePath} alt={property?.propertyTitle} />
+									</Link>
+								</Carousel.Slide>
+							);
+						})}
+					</Carousel>
+				</Stack>
+				<Box className="property-type">{property.propertyType}</Box>
+				<IconButton color={'default'} className="like-btn" onClick={() => likePropertyHandler(user, property?._id)}>
+					{property?.meLiked && property?.meLiked[0]?.myFavorite ? (
+						<FavoriteIcon color="primary" style={{ color: 'red' }} />
+					) : (
+						<FavoriteIcon />
+					)}
+				</IconButton>
+				<Box component={'div'} className={'card-img'}>
 					{property && property?.propertyRank >= topPropertyRank && (
 						<div className={'status'}>
-							<img src="/img/icons/electricity.svg" alt="" />
+							<img src="/img/icons/electricity.png" alt="" />
 							<span>top</span>
 						</div>
 					)}
-
-					<div className={'price'}>${formatterStr(property?.propertyPrice)}</div>
 				</Box>
 				<Box component={'div'} className={'info'}>
-					<strong className={'title'}>{property?.propertyTitle}</strong>
+					<Stack className={'title'}>
+						<strong>{property?.propertyTitle}</strong>
+						<div className={'price'}>${formatterStr(property?.propertyPrice)}/mo</div>
+					</Stack>
 					<p className={'desc'}>{property?.propertyAddress}</p>
 					<div className={'options'}>
 						<div>
@@ -71,20 +103,6 @@ const PropertyBigCard = (props: PropertyBigCardProps) => {
 								<RemoveRedEyeIcon />
 							</IconButton>
 							<Typography className="view-cnt">{property?.propertyViews}</Typography>
-							<IconButton
-								color={'default'}
-								onClick={(e: any) => {
-									e.stopPropagation();
-									likePropertyHandler(user, property?._id);
-								}}
-							>
-								{property?.meLiked && property?.meLiked[0]?.myFavorite ? (
-									<FavoriteIcon style={{ color: 'red' }} />
-								) : (
-									<FavoriteIcon />
-								)}
-							</IconButton>
-							<Typography className="view-cnt">{property?.propertyLikes}</Typography>
 						</div>
 					</div>
 				</Box>

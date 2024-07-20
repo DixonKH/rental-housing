@@ -25,7 +25,8 @@ const withLayoutBasic = (Component: any) => {
 		const memoizedValues = useMemo(() => {
 			let title = '',
 				desc = '',
-				bgImage = '';
+				bgImage = '',
+				bgFrame = '';
 
 			switch (router.pathname) {
 				case '/property':
@@ -33,6 +34,7 @@ const withLayoutBasic = (Component: any) => {
 					desc =
 						'We are glad to see you again! Here you will find all types of student accommodation including student houses, flats and halls.';
 					bgImage = '/img/banner/cities/INCHEON.webp';
+					bgFrame = '/img/banner/locationFilterImg.svg';
 					break;
 				case '/agent':
 					title = 'Agents';
@@ -43,7 +45,8 @@ const withLayoutBasic = (Component: any) => {
 				case '/agent/detail':
 					title = 'Agent Page';
 					desc = 'Home / For Rent';
-					bgImage = '/img/banner/header2.svg';
+					bgImage = '/img/banner/header3.svg';
+					bgFrame = '/img/banner/locationFilterImg.svg';
 					break;
 				case '/mypage':
 					title = 'my page';
@@ -83,7 +86,7 @@ const withLayoutBasic = (Component: any) => {
 					break;
 			}
 
-			return { title, desc, bgImage };
+			return { title, desc, bgImage, bgFrame };
 		}, [router.pathname]);
 
 		/** LIFECYCLES **/
@@ -136,7 +139,7 @@ const withLayoutBasic = (Component: any) => {
 								</Stack>
 								<Stack className="container-img">
 									<img src={memoizedValues.bgImage} alt="" />
-									<img className="img-2" src="/img/banner/locationFilterImg.svg" alt="" />
+									<img className="img-2" src={memoizedValues.bgFrame} alt="" />
 								</Stack>
 							</Stack>
 						</div>
