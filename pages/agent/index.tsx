@@ -111,6 +111,7 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 		try {
 			if (!id) return;
 			if (!user._id) throw new Error(Messages.error2);
+			if (user._id === id) throw new Error(Messages.error6);
 			await likeTargetMember({
 				variables: {
 					input: id,
