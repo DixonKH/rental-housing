@@ -947,6 +947,94 @@
 						width: 100%;
 						.similar-homes-slide {
 							width: 411px;
+							position: relative;
+							.carousel {
+								position: relative;
+								width: 100%;
+								border-radius: 12px 12px 0px 0px;
+								img {
+									position: absolute;
+									width: 410px;
+									height: 250px;
+									object-fit: cover;
+									border-radius: 12px 12px 0px 0px;
+								}
+							}
+							.property-type {
+								position: absolute;
+								top: 46%;
+								z-index: 9;
+								left: 0px;
+								padding: 7px 10px;
+								align-items: center;
+								border-top-right-radius: 6px;
+								border-bottom-right-radius: 6px;
+								background: #ec6c1e;
+								color: #fff;
+							}
+							.like-btn {
+								position: absolute;
+								top: 15px;
+								right: 15px;
+								display: flex;
+								align-items: center;
+								justify-content: center;
+								width: 31px;
+								height: 29px;
+								border-radius: 50%;
+								background: #fff;
+								cursor: pointer;
+								z-index: 9;
+								svg {
+									font-size: 18px;
+								}
+							}
+							.card-img {
+								position: absolute;
+								top: 0px;
+								left: 0px;
+								display: flex;
+								align-items: center;
+								justify-content: center;
+								width: 65px;
+								height: 29px;
+								cursor: pointer;
+								z-index: 9;
+								svg {
+									font-size: 18px;
+								}
+								.status {
+									background: #34cc99;
+									width: 65px;
+									height: 29px;
+									padding: 0px 5px;
+								}
+							}
+							.info {
+								.title {
+									display: flex;
+									flex-direction: row;
+									align-items: center;
+									justify-content: space-between;
+									strong {
+										color: #181a20;
+										font-family: $font;
+										font-size: 17px;
+										font-style: normal;
+										font-weight: 700;
+										line-height: normal;
+										text-transform: capitalize;
+									}
+									.price {
+										color: #34cc99;
+										font-family: $font;
+										font-size: 17px;
+										font-style: normal;
+										font-weight: 800;
+										line-height: normal;
+									}
+								}
+							}
 						}
 					}
 				}
