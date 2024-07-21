@@ -122,7 +122,6 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 	const amenityImages: string[] = [
 		'/img/icons/icons8-elevator-32.png',
 		'/img/icons/icons8-wifi-32.png',
-		'/img/icons/icons8-tv-32.png',
 		'/img/icons/icons8-parking-32.png',
 		'/img/icons/icons8-washing-machine-32.png',
 		'/img/icons/icons8-dishwasher-32.png',
@@ -130,6 +129,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 		'/img/icons/icons8-vacuum-cleaner-32.png',
 		'/img/icons/icons8-heater-32.png',
 		'/img/icons/icons8-furniture-32.png',
+		'/img/icons/icons8-tv-32.png',
 	];
 
 	const utilityBills: string[] = [
