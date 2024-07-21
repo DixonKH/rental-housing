@@ -1,15 +1,18 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Button, Stack, Typography } from '@mui/material';
+import { Button, Checkbox, Stack, Typography } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
-import { PropertyLocation, PropertyType } from '../../enums/property.enum';
+import { PropertyAmenities, PropertyLocation, PropertyType, PropertyUtilityBills } from '../../enums/property.enum';
 import { REACT_APP_API_URL, propertySquare } from '../../config';
 import { PropertyInput } from '../../types/property/property.input';
 import axios from 'axios';
 import { getJwtToken } from '../../auth';
-import { sweetMixinErrorAlert } from '../../sweetAlert';
-import { useReactiveVar } from '@apollo/client';
+import { sweetErrorHandling, sweetMixinErrorAlert, sweetMixinSuccessAlert } from '../../sweetAlert';
+import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { userVar } from '../../../apollo/store';
+import { CREATE_PROPERTY, UPDATE_PROPERTY } from '../../../apollo/user/mutation';
+import { GET_PROPERTY } from '../../../apollo/user/query';
+import styled from 'styled-components';
 
 const AddProperty = ({ initialValues, ...props }: any) => {
 	const device = useDeviceDetect();
@@ -17,19 +20,37 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 	const inputRef = useRef<any>(null);
 	const [insertPropertyData, setInsertPropertyData] = useState<PropertyInput>(initialValues);
 	const [propertyType, setPropertyType] = useState<PropertyType[]>(Object.values(PropertyType));
+	const [propertyUtilityBills, setPropertyUtilityBills] = useState<PropertyUtilityBills[]>(
+		Object.values(PropertyUtilityBills),
+	);
+	const [propertyAmenities, setPropertyAmenities] = useState<PropertyAmenities[]>(Object.values(PropertyAmenities));
 	const [propertyLocation, setPropertyLocation] = useState<PropertyLocation[]>(Object.values(PropertyLocation));
 	const token = getJwtToken();
 	const user = useReactiveVar(userVar);
 
 	/** APOLLO REQUESTS **/
-	let getPropertyData: any, getPropertyLoading: any;
+	const [createProperty] = useMutation(CREATE_PROPERTY);
+	const [updateProperty] = useMutation(UPDATE_PROPERTY);
+
+	const {
+		loading: getPropertyLoading,
+		data: getPropertyData,
+		error: getPropertyError,
+		refetch: getPropertyRefetch,
+	} = useQuery(GET_PROPERTY, {
+		fetchPolicy: 'network-only',
+		variables: { input: router.query.propertyId },
+	});
 
 	/** LIFECYCLES **/
 	useEffect(() => {
 		setInsertPropertyData({
 			...insertPropertyData,
 			propertyTitle: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyTitle : '',
+			propertyAmenities: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyAmenities : [],
 			propertyPrice: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyPrice : 0,
+			propertyDeposite: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyDeposite : 0,
+			propertyUtilityBills: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyUtilityBills : [],
 			propertyType: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyType : '',
 			propertyLocation: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyLocation : '',
 			propertyAddress: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyAddress : '',
@@ -99,7 +120,10 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 		if (
 			insertPropertyData.propertyTitle === '' ||
 			insertPropertyData.propertyPrice === 0 || // @ts-ignore
+			insertPropertyData.propertyDeposite === 0 || // @ts-ignore
 			insertPropertyData.propertyType === '' || // @ts-ignore
+			insertPropertyData.propertyAmenities.length === 0 || // @ts-ignore
+			insertPropertyData.propertyUtilityBills.length === 0 || // @ts-ignore
 			insertPropertyData.propertyLocation === '' || // @ts-ignore
 			insertPropertyData.propertyAddress === '' || // @ts-ignore
 			insertPropertyData.propertyRent === '' ||
@@ -113,15 +137,74 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 		}
 	};
 
-	const insertPropertyHandler = useCallback(async () => {}, [insertPropertyData]);
+	const insertPropertyHandler = useCallback(async () => {
+		try {
+			const result = await createProperty({ variables: { input: insertPropertyData } });
+			await sweetMixinSuccessAlert('This property has been created successfully');
+			await router.push({
+				pathname: '/mypage',
+				query: { category: 'myProperties' },
+			});
+		} catch (err: any) {
+			sweetErrorHandling(err).then();
+		}
+	}, [insertPropertyData]);
 
-	const updatePropertyHandler = useCallback(async () => {}, [insertPropertyData]);
+	const updatePropertyHandler = useCallback(async () => {
+		try {
+			// @ts-ignore
+			insertPropertyData._id = getPropertyData?.getProperty?._id;
+			const result = await updateProperty({ variables: { input: insertPropertyData } });
+
+			await sweetMixinSuccessAlert('This property has been updated successfully!');
+			await router.push({
+				pathname: '/mypage',
+				query: { category: 'myProperties' },
+			});
+		} catch (err: any) {
+			sweetErrorHandling(err).then();
+		}
+	}, [insertPropertyData]);
 
 	if (user?.memberType !== 'AGENT') {
 		router.back();
 	}
 
 	console.log('+insertPropertyData', insertPropertyData);
+
+	const propertyUtility = insertPropertyData.propertyUtilityBills || [];
+
+	const handleCheckboxChange = (utility: PropertyUtilityBills) => {
+		const utilities = insertPropertyData.propertyUtilityBills.includes(utility)
+			? insertPropertyData.propertyUtilityBills.filter((opt) => opt !== utility)
+			: [...insertPropertyData.propertyUtilityBills, utility];
+		setInsertPropertyData({ ...insertPropertyData, propertyUtilityBills: utilities });
+	};
+
+	const propertyAmenitiy = insertPropertyData.propertyAmenities || [];
+
+	const handleCheckboxAmenityChange = (amenity: PropertyAmenities) => {
+		const amenities = insertPropertyData.propertyAmenities.includes(amenity)
+			? insertPropertyData.propertyAmenities.filter((opt) => opt !== amenity)
+			: [...insertPropertyData.propertyAmenities, amenity];
+		setInsertPropertyData({ ...insertPropertyData, propertyAmenities: amenities });
+	};
+
+	const CheckboxContainer = styled.div`
+		display: flex;
+		align-items: center;
+		margin-bottom: 8px;
+	`;
+	const StyledCheckbox = styled.input`
+		width: 16px;
+		height: 16px;
+		margin-right: 10px;
+		cursor: pointer;
+	`;
+	const StyledLabel = styled.label`
+		font-size: 15px;
+		cursor: pointer;
+	`;
 
 	if (device === 'mobile') {
 		return <div>ADD NEW PROPERTY MOBILE PAGE</div>;
@@ -159,6 +242,18 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 										value={insertPropertyData.propertyPrice}
 										onChange={({ target: { value } }) =>
 											setInsertPropertyData({ ...insertPropertyData, propertyPrice: parseInt(value) })
+										}
+									/>
+								</Stack>
+								<Stack className="price-year-after-price">
+									<Typography className="title">Deposite</Typography>
+									<input
+										type="text"
+										className="description-input"
+										placeholder={'Deposite'}
+										value={insertPropertyData.propertyDeposite}
+										onChange={({ target: { value } }) =>
+											setInsertPropertyData({ ...insertPropertyData, propertyDeposite: parseInt(value) })
 										}
 									/>
 								</Stack>
@@ -228,29 +323,6 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 									/>
 								</Stack>
 							</Stack>
-
-							<Stack className="config-row">
-								<Stack className="price-year-after-price">
-									<Typography className="title">Rent</Typography>
-									<select
-										className={'select-description'}
-										value={insertPropertyData.propertyRent ? 'yes' : 'no'}
-										defaultValue={insertPropertyData.propertyRent ? 'yes' : 'no'}
-										onChange={({ target: { value } }) =>
-											setInsertPropertyData({ ...insertPropertyData, propertyRent: value === 'yes' })
-										}
-									>
-										<option disabled={true} selected={true}>
-											Select
-										</option>
-										<option value={'yes'}>Yes</option>
-										<option value={'no'}>No</option>
-									</select>
-									<div className={'divider'}></div>
-									<img src={'/img/icons/Vector.svg'} className={'arrow-down'} />
-								</Stack>
-							</Stack>
-
 							<Stack className="config-row">
 								<Stack className="price-year-after-price">
 									<Typography className="title">Rooms</Typography>
@@ -313,6 +385,38 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 									</select>
 									<div className={'divider'}></div>
 									<img src={'/img/icons/Vector.svg'} className={'arrow-down'} />
+								</Stack>
+							</Stack>
+							<Stack className="config-row">
+								<Stack className="price-year-after-price">
+									<Stack className="config-column">
+										<Typography className="title">Amenities</Typography>
+										{Object.values(PropertyAmenities).map((amenity) => (
+											<CheckboxContainer key={amenity}>
+												<StyledCheckbox
+													type="checkbox"
+													checked={propertyAmenitiy.includes(amenity)}
+													onChange={() => handleCheckboxAmenityChange(amenity)}
+												/>
+												<StyledLabel>{amenity}</StyledLabel>
+											</CheckboxContainer>
+										))}
+									</Stack>
+								</Stack>
+								<Stack className="price-year-after-price">
+									<Stack className="config-column">
+										<Typography className="title">Utility Bills</Typography>
+										{Object.values(PropertyUtilityBills).map((utility) => (
+											<CheckboxContainer key={utility}>
+												<StyledCheckbox
+													type="checkbox"
+													checked={propertyUtility.includes(utility)}
+													onChange={() => handleCheckboxChange(utility)}
+												/>
+												<StyledLabel>{utility}</StyledLabel>
+											</CheckboxContainer>
+										))}
+									</Stack>
 								</Stack>
 							</Stack>
 
@@ -442,7 +546,10 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 AddProperty.defaultProps = {
 	initialValues: {
 		propertyTitle: '',
+		propertyAmenities: [],
 		propertyPrice: 0,
+		propertyDeposite: 0,
+		propertyUtilityBills: [],
 		propertyType: '',
 		propertyLocation: '',
 		propertyAddress: '',

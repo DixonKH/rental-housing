@@ -8,7 +8,7 @@ for (let i = 1970; i <= thisYear; i++) {
 	propertyYears.push(String(i));
 }
 
-export const propertySquare = [0, 25, 50, 75, 100, 125, 150, 200, 300, 500];
+export const propertySquare = [0, 15, 17, 18, 20, 23, 25, 27, 30, 32, 34, 36, 38, 40, 42, 45, 48, 50, 55, 60, 75];
 
 export const Messages = {
 	error1: 'Something went wrong!',
