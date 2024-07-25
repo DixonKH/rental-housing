@@ -69,7 +69,7 @@ const withLayoutBasic = (Component: any) => {
 				case '/cs':
 					title = 'CS';
 					desc = 'We are glad to see you again!';
-					bgImage = '/img/banner/header2.svg';
+					bgImage = '/img/banner/header3.svg';
 					break;
 				case '/account/join':
 					title = 'Login/Signup';
@@ -139,7 +139,7 @@ const withLayoutBasic = (Component: any) => {
 								</Stack>
 								<Stack className="container-img">
 									<img src={memoizedValues.bgImage} alt="" />
-									<img className="img-2" src={memoizedValues.bgFrame} alt="" />
+									<img className="img-2" src={memoizedValues.bgFrame} alt="bg" />
 								</Stack>
 							</Stack>
 						</div>

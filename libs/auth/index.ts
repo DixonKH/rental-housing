@@ -18,6 +18,7 @@ export function setJwtToken(token: string) {
 export const logIn = async (nick: string, password: string): Promise<void> => {
 	try {
 		const { jwtToken } = await requestJwtToken({ nick, password });
+		console.log('accessToken', jwtToken);
 
 		if (jwtToken) {
 			updateStorage({ jwtToken });

@@ -9,6 +9,7 @@ import { TokenRefreshLink } from 'apollo-link-token-refresh';
 import { sweetErrorAlert } from '../libs/sweetAlert';
 import { send } from 'process';
 import { isArrayBufferView } from 'util/types';
+import { socketVar } from './store';
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
 function getHeaders() {
@@ -34,13 +35,14 @@ class LoggingWebSocket {
 	private socket: WebSocket;
 
 	constructor(url: string) {
-		this.socket = new WebSocket(url);
+		this.socket = new WebSocket(`${url}/?token=${getJwtToken}`);
+		socketVar(this.socket);
 		this.socket.onopen = () => {
 			console.log('WebSocket connected');
 		};
 
-		this.socket.onmessage = (event) => {
-			console.log('WebSocket received message', event.data);
+		this.socket.onmessage = (msg) => {
+			console.log('WebSocket received message', msg.data);
 		};
 
 		this.socket.onerror = (err) => {

@@ -343,3 +343,23 @@ export const UNSUBSCRIBE = gql`
 		}
 	}
 `;
+
+/**************************
+ *         MESSAGE       *
+ *************************/
+export const CREATE_MESSAGE = gql`
+	mutation CreateMessage($input: MessageInput!) {
+		createMessage(input: $input) {
+			_id
+			messageStatus
+			senderName
+			senderPhone
+			senderEmail
+			messageDesc
+			messageRefId
+			memberId
+			createdAt
+			updatedAt
+		}
+	}
+`;
