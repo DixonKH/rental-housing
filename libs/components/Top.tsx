@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter, withRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { getJwtToken, logOut, updateUserInfo } from '../auth';
-import { Stack, Box, IconButton, Typography } from '@mui/material';
+import { Stack, Box, IconButton, Typography, Badge } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import { alpha, styled } from '@mui/material/styles';
@@ -24,22 +24,27 @@ import { NotificationStatus } from '../enums/notification.enum';
 import { Notification } from '../types/notification/notification';
 
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
-	padding: theme.spacing(1.5),
-	borderBottom: `1px solid ${theme.palette.divider}`,
-	'&:last-child': {
-		borderBottom: 'none',
+	display: 'flex',
+	flexDirection: 'column',
+	alignItems: 'flex-start',
+	padding: theme.spacing(2),
+	borderRadius: theme.shape.borderRadius,
+	transition: 'background-color 0.3s',
+	'&:hover': {
+		backgroundColor: status === 'WAIT' ? '#fcb6b9' : '#b3e6b3',
 	},
-	'&.unread': {
-		backgroundColor: theme.palette.action.hover,
+	'& .notification-title': {
+		fontWeight: 'bold',
+		marginBottom: theme.spacing(0.5),
 	},
-}));
-
-const NotificationTitle = styled(Typography)(({ theme }) => ({
-	fontWeight: 'bold',
-}));
-
-const NotificationDesc = styled(Typography)(({ theme }) => ({
-	color: theme.palette.text.secondary,
+	'& .notification-desc': {
+		marginBottom: theme.spacing(1),
+	},
+	'& .notification-time': {
+		alignSelf: 'flex-end',
+		color: theme.palette.text.secondary,
+		fontSize: '0.75rem',
+	},
 }));
 
 const Top = () => {
@@ -166,16 +171,17 @@ const Top = () => {
 		getNotificationsRefetch();
 		router.push(
 			notification.notificationGroup === 'ARTICLE'
-				? `/mypage?category=myArticles`
+				? `/community/detail?articleCategory=FREE&id=${notification.articleId}`
 				: notification.notificationGroup === 'PROPERTY'
-				? `agent/detail?agentId=${notification.receiverId}`
+				? `property/detail?id=${notification.propertyId}`
 				: notification.notificationGroup === 'MEMBER'
-				? `/member/${notification.authorId}`
+				? `/agent/detail?agentId=${notification.receiverId}`
 				: '/',
 		); // Default route if none match
 	};
 
 	console.log('notifications: ', userNotifications);
+	const unreadNotifications = userNotifications.filter((notification) => notification.notificationStatus === 'WAIT');
 
 	const StyledMenu = styled((props: MenuProps) => (
 		<Menu
@@ -313,18 +319,35 @@ const Top = () => {
 								{user?._id && (
 									<>
 										<IconButton onClick={handleNotificationClick}>
-											<NotificationsOutlinedIcon className={'notification-icon'} />
-											<Box className={'notification-badje'}>{userNotifications.length}</Box>
+											<Badge badgeContent={unreadNotifications.length} color="error">
+												<NotificationsOutlinedIcon className={'notification-icon'} />
+											</Badge>
 										</IconButton>
 										<Menu
 											anchorEl={notificationAnchor}
 											open={notificationOpen}
 											onClose={handleNotificationClose}
-											sx={{ mt: '5px' }}
-											className={'notification'}
+											PaperProps={{
+												elevation: 1,
+												sx: {
+													marginTop: '7px',
+													backgroundColor: '#2e3b4e',
+													color: 'black',
+													minWidth: '300px',
+													width: '400px',
+													borderRadius: '12px',
+													maxHeight: '400px',
+													overflowY: 'auto',
+												},
+											}}
+											MenuListProps={{
+												sx: {
+													padding: 0,
+												},
+											}}
 										>
 											{userNotifications.length === 0 ? (
-												<MenuItem>{t('No new notifications')}</MenuItem>
+												<Stack>{t('No new notifications')}</Stack>
 											) : (
 												userNotifications.map((notification: any) => (
 													<MenuItem
@@ -332,14 +355,37 @@ const Top = () => {
 														className={'notification-items'}
 														onClick={() => handleNotificationRead(notification)}
 														sx={{
+															display: 'flex',
+															flexDirection: 'column',
+															alignItems: 'flex-start',
 															backgroundColor:
 																notification.notificationStatus === NotificationStatus.WAIT ? '#fdbabb' : '#b8fdbf',
+															'&:hover': {
+																backgroundColor:
+																	notification.notificationStatus === NotificationStatus.WAIT ? '#fca5a5' : '#a7f3d0',
+															},
+															borderRadius: '10px',
+															marginBottom: '7px',
+															padding: '15px 20px',
+															transition: 'background-color 0.3s ease',
 														}}
 													>
-														<div className={'items'}>
-															<strong>{notification.notificationTitle}</strong>
-															<p>{notification.notificationDesc}</p>
-															<small>{notification.createdAt}</small>
+														<div>
+															<Typography
+																variant="subtitle1"
+																sx={{ fontWeight: '700', fontFamily: 'Nunito', fontSize: '16px' }}
+															>
+																{notification.notificationTitle}
+															</Typography>
+															<Typography
+																variant="body2"
+																sx={{ margin: '0.5px 0', fontFamily: 'Nunito', fontSize: '15px' }}
+															>
+																{notification.notificationDesc}
+															</Typography>
+															<Typography variant="caption" sx={{ color: 'gray' }}>
+																{notification.createdAt}
+															</Typography>
 														</div>
 													</MenuItem>
 												))
