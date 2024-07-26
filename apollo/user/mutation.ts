@@ -363,3 +363,24 @@ export const CREATE_MESSAGE = gql`
 		}
 	}
 `;
+
+/**************************
+ *         NOTIFICATION       *
+ *************************/
+export const UPDATE_NOTIFICATION = gql`
+	mutation UpdateNotification($input: NotificationUpdate!) {
+		updateNotification(input: $input) {
+			_id
+			notificationType
+			notificationStatus
+			notificationGroup
+			notificationTitle
+			notificationDesc
+			authorId
+			receiverId
+			messageId
+			propertyId
+			articleId
+		}
+	}
+`;

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter, withRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { getJwtToken, logOut, updateUserInfo } from '../auth';
-import { Stack, Box } from '@mui/material';
+import { Stack, Box, IconButton, Typography } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import { alpha, styled } from '@mui/material/styles';
@@ -13,10 +13,34 @@ import { CaretDown } from 'phosphor-react';
 import useDeviceDetect from '../hooks/useDeviceDetect';
 import Link from 'next/link';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
-import { useReactiveVar } from '@apollo/client';
+import { useMutation, useQuery, useReactiveVar } from '@apollo/client';
 import { userVar } from '../../apollo/store';
 import { Logout } from '@mui/icons-material';
 import { REACT_APP_API_URL } from '../config';
+import { GET_NOTIFICATIONS } from '../../apollo/user/query';
+import { UPDATE_NOTIFICATION } from '../../apollo/user/mutation';
+import { T } from '../types/common';
+import { NotificationStatus } from '../enums/notification.enum';
+import { Notification } from '../types/notification/notification';
+
+const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
+	padding: theme.spacing(1.5),
+	borderBottom: `1px solid ${theme.palette.divider}`,
+	'&:last-child': {
+		borderBottom: 'none',
+	},
+	'&.unread': {
+		backgroundColor: theme.palette.action.hover,
+	},
+}));
+
+const NotificationTitle = styled(Typography)(({ theme }) => ({
+	fontWeight: 'bold',
+}));
+
+const NotificationDesc = styled(Typography)(({ theme }) => ({
+	color: theme.palette.text.secondary,
+}));
 
 const Top = () => {
 	const device = useDeviceDetect();
@@ -32,6 +56,26 @@ const Top = () => {
 	const [bgColor, setBgColor] = useState<boolean>(false);
 	const [logoutAnchor, setLogoutAnchor] = React.useState<null | HTMLElement>(null);
 	const logoutOpen = Boolean(logoutAnchor);
+	const [notificationAnchor, setNotificationAnchor] = useState<null | HTMLElement>(null);
+	const [userNotifications, setUserNotifications] = useState<Notification[]>([]);
+	const notificationOpen = Boolean(notificationAnchor);
+
+	const {
+		loading: getNotificationsLoading,
+		data: getNotificationsData,
+		error: getNotificationsError,
+		refetch: getNotificationsRefetch,
+	} = useQuery(GET_NOTIFICATIONS, {
+		fetchPolicy: 'cache-and-network',
+		variables: { input: user._id },
+		skip: !user?._id,
+		notifyOnNetworkStatusChange: true,
+		onCompleted: (data: T) => {
+			setUserNotifications(data?.getNotifications);
+		},
+	});
+
+	const [updateNotification] = useMutation(UPDATE_NOTIFICATION);
 
 	/** LIFECYCLES **/
 	useEffect(() => {
@@ -57,6 +101,16 @@ const Top = () => {
 		const jwt = getJwtToken();
 		if (jwt) updateUserInfo(jwt);
 	}, []);
+
+	useEffect(() => {
+		const intervalId = setInterval(() => {
+			if (user?._id) {
+				getNotificationsRefetch();
+			}
+		}, 60000); // Fetch notifications every minute
+
+		return () => clearInterval(intervalId);
+	}, [user, getNotificationsRefetch]);
 
 	/** HANDLERS **/
 	const langClick = (e: any) => {
@@ -96,6 +150,32 @@ const Top = () => {
 			setAnchorEl(null);
 		}
 	};
+
+	const handleNotificationClick = (event: any) => {
+		setNotificationAnchor(event.currentTarget);
+	};
+
+	const handleNotificationClose = () => {
+		setNotificationAnchor(null);
+	};
+
+	const handleNotificationRead = async (notification: Notification) => {
+		await updateNotification({
+			variables: { input: { _id: notification._id, notificationStatus: NotificationStatus.READ } },
+		});
+		getNotificationsRefetch();
+		router.push(
+			notification.notificationGroup === 'ARTICLE'
+				? `/mypage?category=myArticles`
+				: notification.notificationGroup === 'PROPERTY'
+				? `agent/detail?agentId=${notification.receiverId}`
+				: notification.notificationGroup === 'MEMBER'
+				? `/member/${notification.authorId}`
+				: '/',
+		); // Default route if none match
+	};
+
+	console.log('notifications: ', userNotifications);
 
 	const StyledMenu = styled((props: MenuProps) => (
 		<Menu
@@ -230,7 +310,43 @@ const Top = () => {
 							)}
 
 							<div className={'lan-box'}>
-								{user?._id && <NotificationsOutlinedIcon className={'notification-icon'} />}
+								{user?._id && (
+									<>
+										<IconButton onClick={handleNotificationClick}>
+											<NotificationsOutlinedIcon className={'notification-icon'} />
+											<Box className={'notification-badje'}>{userNotifications.length}</Box>
+										</IconButton>
+										<Menu
+											anchorEl={notificationAnchor}
+											open={notificationOpen}
+											onClose={handleNotificationClose}
+											sx={{ mt: '5px' }}
+											className={'notification'}
+										>
+											{userNotifications.length === 0 ? (
+												<MenuItem>{t('No new notifications')}</MenuItem>
+											) : (
+												userNotifications.map((notification: any) => (
+													<MenuItem
+														key={notification._id}
+														className={'notification-items'}
+														onClick={() => handleNotificationRead(notification)}
+														sx={{
+															backgroundColor:
+																notification.notificationStatus === NotificationStatus.WAIT ? '#fdbabb' : '#b8fdbf',
+														}}
+													>
+														<div className={'items'}>
+															<strong>{notification.notificationTitle}</strong>
+															<p>{notification.notificationDesc}</p>
+															<small>{notification.createdAt}</small>
+														</div>
+													</MenuItem>
+												))
+											)}
+										</Menu>
+									</>
+								)}
 
 								<Button
 									disableRipple

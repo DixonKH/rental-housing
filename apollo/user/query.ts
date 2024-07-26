@@ -653,7 +653,7 @@ export const GET_MEMBER_FOLLOWINGS = gql`
  *************************/
 export const GET_NOTIFICATIONS = gql`
 	query GetNotifications($input: String!) {
-		getNotifications(memberId: $input) {
+		getNotifications(receiverId: $input) {
 			_id
 			notificationType
 			notificationStatus
