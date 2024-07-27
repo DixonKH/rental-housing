@@ -22,6 +22,7 @@ import { UPDATE_NOTIFICATION } from '../../apollo/user/mutation';
 import { T } from '../types/common';
 import { NotificationStatus } from '../enums/notification.enum';
 import { Notification } from '../types/notification/notification';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
 	display: 'flex',
@@ -347,7 +348,18 @@ const Top = () => {
 											}}
 										>
 											{userNotifications.length === 0 ? (
-												<Stack>{t('No new notifications')}</Stack>
+												<MenuItem
+													sx={{
+														display: 'flex',
+														flexDirection: 'column',
+														alignItems: 'center',
+														justifyContent: 'center',
+														color: '#fff',
+														height: '100px',
+													}}
+												>
+													{t('No new notifications')}
+												</MenuItem>
 											) : (
 												userNotifications.map((notification: any) => (
 													<MenuItem
@@ -373,8 +385,18 @@ const Top = () => {
 														<div>
 															<Typography
 																variant="subtitle1"
-																sx={{ fontWeight: '700', fontFamily: 'Nunito', fontSize: '16px' }}
+																sx={{
+																	fontWeight: '700',
+																	fontFamily: 'Nunito',
+																	fontSize: '16px',
+																	display: 'flex',
+																	flexDirection: 'row',
+																	alignItems: 'center',
+																}}
 															>
+																<NotificationsActiveIcon
+																	sx={{ fontSize: '16px', marginRight: '3px', color: '#212138' }}
+																/>{' '}
 																{notification.notificationTitle}
 															</Typography>
 															<Typography

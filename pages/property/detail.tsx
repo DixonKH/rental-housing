@@ -30,8 +30,9 @@ import 'swiper/css/pagination';
 import { GET_COMMENTS, GET_PROPERTIES, GET_PROPERTY } from '../../apollo/user/query';
 import { T } from '../../libs/types/common';
 import { Direction, Message } from '../../libs/enums/common.enum';
-import { CREATE_COMMENT, LIKE_TARGET_PROPERTY } from '../../apollo/user/mutation';
+import { CREATE_COMMENT, CREATE_MESSAGE, LIKE_TARGET_PROPERTY } from '../../apollo/user/mutation';
 import { sweetErrorHandling, sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
+import { MessageInput } from '../../libs/types/message/message.input';
 
 SwiperCore.use([Autoplay, Navigation, Pagination]);
 
@@ -57,10 +58,19 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 		commentContent: '',
 		commentRefId: '',
 	});
+	const [insertMessageData, setInsertMessageData] = useState<MessageInput>({
+		senderName: '',
+		senderPhone: '',
+		senderEmail: '',
+		messageDesc: '',
+		messageRefId: '',
+	});
+	const [receiverId, setReceiverId] = useState<string>('');
 
 	/** APOLLO REQUESTS **/
 	const [likeTargetProperty] = useMutation(LIKE_TARGET_PROPERTY);
 	const [createComment] = useMutation(CREATE_COMMENT);
+	const [createMessage] = useMutation(CREATE_MESSAGE);
 
 	const {
 		loading: getPropertyLoading,
@@ -75,6 +85,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 		onCompleted: (data: T) => {
 			if (data?.getProperty) setProperty(data?.getProperty);
 			if (data?.getProperty) setSlideImage(data?.getProperty?.propertyImages[0]);
+			if (data?.getProperty) setReceiverId(data?.getProperty?.memberId);
 		},
 	});
 
@@ -162,6 +173,15 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 		}
 	}, [commentInquiry]);
 
+	useEffect(() => {
+		if (receiverId) {
+			setInsertMessageData((prevData) => ({
+				...prevData,
+				messageRefId: receiverId,
+			}));
+		}
+	}, [receiverId]);
+
 	/** HANDLERS **/
 	const changeImageHandler = (image: string) => {
 		setSlideImage(image);
@@ -205,6 +225,30 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 			setInsertCommentData({ ...insertCommentData, commentContent: '' });
 			await getCommentsRefetch({ input: commentInquiry });
 		} catch (err) {
+			await sweetErrorHandling(err);
+		}
+	};
+
+	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
+		setInsertMessageData({
+			...insertMessageData,
+			[name]: value,
+		});
+	};
+
+	const createMessageHandler = async () => {
+		try {
+			if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
+			if (!insertMessageData.senderName || !insertMessageData.senderEmail || !insertMessageData.messageDesc) {
+				throw new Error('Please fill in all required fields');
+			}
+			console.log('Message Data:', insertMessageData);
+			await createMessage({ variables: { input: insertMessageData } });
+			setInsertMessageData({ ...insertMessageData, senderName: '', senderPhone: '', senderEmail: '', messageDesc: '' });
+			await sweetTopSmallSuccessAlert('Message sent successfully!', 700);
+		} catch (err) {
+			console.log('Error:', err);
 			await sweetErrorHandling(err);
 		}
 	};
@@ -630,24 +674,49 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 										</Stack>
 										<Stack className={'info-box'}>
 											<Typography className={'sub-title'}>Name</Typography>
-											<input type={'text'} placeholder={'Enter your name'} />
+											<input
+												type={'text'}
+												placeholder={'Enter your name'}
+												name={'senderName'}
+												value={insertMessageData.senderName}
+												onChange={handleInputChange}
+												required={true}
+											/>
 										</Stack>
 										<Stack className={'info-box'}>
 											<Typography className={'sub-title'}>Phone</Typography>
-											<input type={'text'} placeholder={'Enter your phone'} />
+											<input
+												type={'text'}
+												placeholder={'Enter your phone'}
+												name={'senderPhone'}
+												value={insertMessageData.senderPhone}
+												onChange={handleInputChange}
+												required={true}
+											/>
 										</Stack>
 										<Stack className={'info-box'}>
 											<Typography className={'sub-title'}>Email</Typography>
-											<input type={'text'} placeholder={'creativelayers088'} />
+											<input
+												type={'text'}
+												placeholder={'creativelayers088'}
+												name={'senderEmail'}
+												value={insertMessageData.senderEmail}
+												onChange={handleInputChange}
+												required={true}
+											/>
 										</Stack>
 										<Stack className={'info-box'}>
 											<Typography className={'sub-title'}>Message</Typography>
-											<textarea
+											<input
 												placeholder={'Hello, I am interested in \n' + '[Renovated property at  floor]'}
-											></textarea>
+												name="messageDesc"
+												value={insertMessageData.messageDesc}
+												onChange={handleInputChange}
+												multiple={true}
+											/>
 										</Stack>
 										<Stack className={'info-box'}>
-											<Button className={'send-message'}>
+											<Button onClick={createMessageHandler} className={'send-message'}>
 												<Typography className={'title'}>Send Message</Typography>
 												<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
 													<g clipPath="url(#clip0_6975_593)">
