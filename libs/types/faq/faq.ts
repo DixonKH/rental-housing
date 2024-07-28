@@ -1,6 +1,6 @@
 import { FaqCategory, FaqStatus } from '../../enums/faq.enum';
 
-export interface Faq {
+export interface FaqType {
 	_id: string;
 	faqCategory: FaqCategory;
 	faqStatus: FaqStatus;

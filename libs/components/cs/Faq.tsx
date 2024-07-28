@@ -6,6 +6,8 @@ import { useRouter } from 'next/router';
 import { styled } from '@mui/material/styles';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
+import { FaqInquiry } from '../../types/faq/faq.input';
+import { FaqType } from '../../types/faq/faq';
 
 const Accordion = styled((props: AccordionProps) => <MuiAccordion disableGutters elevation={0} square {...props} />)(
 	({ theme }) => ({
@@ -30,15 +32,18 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
 	},
 }));
 
-const Faq = () => {
+const Faq = ({ initialFaq, ...props }: any) => {
 	const device = useDeviceDetect();
 	const router = useRouter();
 	const [category, setCategory] = useState<string>('property');
 	const [expanded, setExpanded] = useState<string | false>('panel1');
+	const [faqInquiry, setFaqInquity] = useState<FaqInquiry>(initialFaq);
+	const [propertyNotices, setPropertyNotices] = useState<FaqType[]>([]);
+	const [noticeTotal, setNoticeTotal] = useState<number>(0);
 
 	/** APOLLO REQUESTS **/
 	/** LIFECYCLES **/
-	
+
 	/** HANDLERS **/
 	const changeCategoryHandler = (category: string) => {
 		setCategory(category);
@@ -520,6 +525,15 @@ const Faq = () => {
 			</Stack>
 		);
 	}
+};
+
+Faq.defaultProps = {
+	initialFaq: {
+		page: 1,
+		limit: 5,
+		sort: 'createdAt',
+		direction: 'DESC',
+	},
 };
 
 export default Faq;

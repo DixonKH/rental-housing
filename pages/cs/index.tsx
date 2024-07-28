@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { Box, Stack } from '@mui/material';
@@ -7,6 +7,9 @@ import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import Notice from '../../libs/components/cs/Notice';
 import Faq from '../../libs/components/cs/Faq';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useQuery } from '@apollo/client';
+import { GET_NOTICES } from '../../apollo/user/query';
+import { T } from '../../libs/types/common';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -17,8 +20,6 @@ export const getStaticProps = async ({ locale }: any) => ({
 const CS: NextPage = () => {
 	const device = useDeviceDetect();
 	const router = useRouter();
-
-	/** APOLLO REQUESTS **/
 
 	/** HANDLERS **/
 	const changeTabHandler = (tab: string) => {

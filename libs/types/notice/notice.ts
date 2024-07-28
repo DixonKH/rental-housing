@@ -1,7 +1,7 @@
 import { NoticeCategory, NoticeStatus } from '../../enums/notice.enum';
 import { Member } from '../member/member';
 
-export interface Notice {
+export interface NoticeType {
 	_id: string;
 	noticeCategory: NoticeCategory;
 	noticeStatus: NoticeStatus;
@@ -11,4 +11,13 @@ export interface Notice {
 	updatedAt: Date;
 	memberId: string;
 	memberData?: Member;
+}
+
+export interface TotalCounter {
+	total: number;
+}
+
+export interface Notices {
+	list: NoticeType[];
+	metaCounter?: TotalCounter[];
 }
