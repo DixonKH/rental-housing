@@ -13,11 +13,32 @@ import TablePagination from '@mui/material/TablePagination';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import { NoticeList } from '../../../libs/components/admin/cs/NoticeList';
+import { AllNoticeInquiry } from '../../../libs/types/notice/notice.input';
+import { NoticeType } from '../../../libs/types/notice/notice';
 
-const AdminNotice: NextPage = (props: any) => {
+const AdminNotice: NextPage = ({ initialInquiry, ...props }: any) => {
 	const [anchorEl, setAnchorEl] = useState<[] | HTMLElement[]>([]);
+	const [noticeInquiry, setNoticeInquiry] = useState<AllNoticeInquiry>(initialInquiry);
+	const [notices, setNotices] = useState<NoticeType[]>([]);
+	const [noticeTotal, setNoticeTotal] = useState<number>(0);
+	const [value, setValue] = useState(noticeInquiry?.search?.noticeStatus ? noticeInquiry?.search?.noticeStatus : 'ALL');
+	const [searchType, setSearchType] = useState('ALL');
 
 	/** APOLLO REQUESTS **/
+	// const {
+	// 	loading: getAllNoticesByAdminLoading,
+	// 	data: getAllNoticesByAdminData,
+	// 	error: getAllNoticesByAdminError,
+	// 	refetch: getAllNoticesByAdminRefetch,
+	// } = useQuery(GET_ALL_BOARD_ARTICLES_BY_ADMIN, {
+	// 	fetchPolicy: 'network-only',
+	// 	variables: { input: communityInquiry },
+	// 	notifyOnNetworkStatusChange: true,
+	// 	onCompleted: (data: any) => {
+	// 		setArticles(data?.getAllBoardArticlesByAdmin?.list);
+	// 		setArticleTotal(data?.getAllBoardArticlesByAdmin?.totalCount[0]?.total ?? 0);
+	// 	},
+	// });
 	/** LIFECYCLES **/
 	/** HANDLERS **/
 
@@ -122,6 +143,16 @@ const AdminNotice: NextPage = (props: any) => {
 			</Box>
 		</Box>
 	);
+};
+
+AdminNotice.defaultProps = {
+	initialInquiry: {
+		page: 1,
+		limit: 10,
+		sort: 'createdAt',
+		direction: 'DESC',
+		search: {},
+	},
 };
 
 export default withAdminLayout(AdminNotice);
