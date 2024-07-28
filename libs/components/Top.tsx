@@ -109,13 +109,9 @@ const Top = () => {
 	}, []);
 
 	useEffect(() => {
-		const intervalId = setInterval(() => {
-			if (user?._id) {
-				getNotificationsRefetch();
-			}
-		}, 60000); // Fetch notifications every minute
-
-		return () => clearInterval(intervalId);
+		if (user?._id) {
+			getNotificationsRefetch();
+		}
 	}, [user, getNotificationsRefetch]);
 
 	/** HANDLERS **/
