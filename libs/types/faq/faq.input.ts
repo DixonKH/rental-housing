@@ -13,6 +13,7 @@ export interface FaqInquiry {
 	limit: number;
 	sort?: string;
 	direction?: Direction;
+	faqCategory?: FaqCategory;
 }
 
 export interface AFISearch {

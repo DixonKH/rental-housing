@@ -1,5 +1,5 @@
 export enum FaqCategory {
-	PROPERTY = 'PROPRTY',
+	PROPERTY = 'PROPERTY',
 	PAYMENTS = 'PAYMENTS',
 	BUYERS = 'BUYERS',
 	AGENTS = 'AGENTS',
