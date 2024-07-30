@@ -167,6 +167,20 @@ export const REMOVE_COMMENT_BY_ADMIN = gql`
 /**************************
  *        NOTICE        *
  *************************/
+export const CREATE_NOTICE_BY_ADMIN = gql`
+	mutation CreateNoticeByAdmin($input: NoticeInput!) {
+		createNoticeByAdmin(input: $input) {
+			_id
+			noticeCategory
+			noticeStatus
+			noticeTitle
+			noticeContent
+			memberId
+			createdAt
+			updatedAt
+		}
+	}
+`;
 
 export const UPDATE_NOTICE_BY_ADMIN = gql`
 	mutation UpdateNoticeByAdmin($input: NoticeUpdate!) {

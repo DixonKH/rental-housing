@@ -6,4 +6,7 @@ export interface NoticeUpdate {
 	noticeStatus?: NoticeStatus;
 	noticeTitle?: string;
 	noticeContent?: string;
+	memberId?: string;
+	createdAt?: Date;
+	updatedAt?: Date;
 }

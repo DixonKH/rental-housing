@@ -16,6 +16,7 @@ export interface NoticeInquiry {
 
 export interface ANISearch {
 	noticeStatus?: NoticeStatus;
+	noticeCategory?: NoticeCategory;
 	text?: string;
 }
 
