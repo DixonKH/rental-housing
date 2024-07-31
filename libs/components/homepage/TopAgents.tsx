@@ -78,7 +78,7 @@ const TopAgents = (props: TopAgentsProps) => {
 						<Box component={'div'} className={'right'}>
 							<Link
 								href={{
-									pathname: '/property',
+									pathname: '/agent',
 								}}
 								className={'more-box'}
 							>

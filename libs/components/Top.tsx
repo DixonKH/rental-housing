@@ -23,6 +23,7 @@ import { T } from '../types/common';
 import { NotificationStatus } from '../enums/notification.enum';
 import { Notification } from '../types/notification/notification';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import { motion } from 'framer-motion';
 
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
 	display: 'flex',
@@ -249,10 +250,19 @@ const Top = () => {
 					<Stack className={'container'}>
 						<Box component={'div'} className={'logo-box'}>
 							<Link href={'/'}>
-								<img src="/img/logo/logo.png" alt="" />
+								<img src="/img/logo/logo1.png" alt="" />
 							</Link>
+							<Box className={'logo-text'}>
+								<strong>Student</strong>
+								<p>housing</p>
+							</Box>
 						</Box>
-						<Box component={'div'} className={'router-box'}>
+						<motion.div
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ duration: 1, delay: 0.3 }}
+							className={'router-box'}
+						>
 							<Link href={'/'}>
 								<div>{t('Home')}</div>
 							</Link>
@@ -273,7 +283,7 @@ const Top = () => {
 							<Link href={'/cs'}>
 								<div> {t('CS')} </div>
 							</Link>
-						</Box>
+						</motion.div>
 						<Box component={'div'} className={'user-box'}>
 							{user?._id ? (
 								<>

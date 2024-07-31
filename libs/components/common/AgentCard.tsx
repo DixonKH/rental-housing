@@ -9,6 +9,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useReactiveVar } from '@apollo/client';
 import { userVar } from '../../../apollo/store';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import TelegramIcon from '@mui/icons-material/Telegram';
 
 interface AgentCardProps {
 	agent: any;
@@ -34,18 +37,53 @@ const AgentCard = (props: AgentCardProps) => {
 						query: { agentId: agent?._id },
 					}}
 				>
-					<Box
-						component={'div'}
+					<Stack
 						className={'agent-img'}
 						style={{
 							backgroundImage: `url(${imagePath})`,
 							backgroundSize: 'cover',
 							backgroundPosition: 'center',
 							backgroundRepeat: 'no-repeat',
+							position: 'relative',
 						}}
 					>
-						<div className="agent-props">{agent?.memberProperties} properties</div>
-					</Box>
+						<div
+							style={{
+								position: 'absolute',
+								top: '220px',
+								left: '90px',
+								width: '95px',
+								height: '40px',
+								background: '#34cc99',
+								fontSize: '12px',
+								display: 'flex',
+								flexDirection: 'row',
+								alignItems: 'center',
+								justifyContent: 'center',
+							}}
+							className="agent-props"
+						>
+							{agent?.memberProperties} properties
+						</div>
+						<div
+							style={{
+								position: 'absolute',
+								top: '220px',
+								left: '10px',
+								width: '80px',
+								height: '40px',
+								background: '#ec6c1e',
+								display: 'flex',
+								flexDirection: 'row',
+								alignItems: 'center',
+								justifyContent: 'center',
+							}}
+						>
+							<FacebookIcon sx={{ fontSize: '22px' }} />
+							<TelegramIcon sx={{ fontSize: '22px' }} />
+							<InstagramIcon sx={{ fontSize: '22px' }} />
+						</div>
+					</Stack>
 				</Link>
 
 				<Stack className={'agent-desc'}>

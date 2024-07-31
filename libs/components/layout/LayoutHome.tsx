@@ -13,6 +13,36 @@ import Chat from '../Chat';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Opacity } from '@mui/icons-material';
+
+const fadeUp = (delay: number) => {
+	return {
+		hidden: {
+			opacity: 0,
+			y: 100,
+			scale: 0.5,
+		},
+		show: {
+			opacity: 1,
+			y: 0,
+			scale: 1,
+			transition: {
+				duration: 0.5,
+				delay: delay,
+				ease: 'easeInOut',
+			},
+		},
+		exit: {
+			opacity: 0,
+			y: 50,
+			transition: {
+				duration: 0.2,
+				ease: 'easeInOut',
+			},
+		},
+	};
+};
 
 const withLayoutMain = (Component: any) => {
 	return (props: any) => {
@@ -63,9 +93,12 @@ const withLayoutMain = (Component: any) => {
 
 						<Stack className={'header-main'}>
 							{/* <FiberContainer /> */}
-							<Stack className={'container'}>
-								<HeaderFilter />
-							</Stack>
+							<div className="header-img-cover"></div>
+							<AnimatePresence mode="wait">
+								<motion.div variants={fadeUp(0.2)} initial="hidden" animate="show" exit="exit" className={'container'}>
+									<HeaderFilter />
+								</motion.div>
+							</AnimatePresence>
 						</Stack>
 
 						<Stack id={'main'}>
