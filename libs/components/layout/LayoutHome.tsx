@@ -4,7 +4,6 @@ import Head from 'next/head';
 import Top from '../Top';
 import Footer from '../Footer';
 import { Stack } from '@mui/material';
-import FiberContainer from '../common/FiberContainer';
 import HeaderFilter from '../homepage/HeaderFilter';
 import { userVar } from '../../../apollo/store';
 import { useReactiveVar } from '@apollo/client';
@@ -92,7 +91,6 @@ const withLayoutMain = (Component: any) => {
 						</Stack>
 
 						<Stack className={'header-main'}>
-							{/* <FiberContainer /> */}
 							<div className="header-img-cover"></div>
 							<AnimatePresence mode="wait">
 								<motion.div variants={fadeUp(0.2)} initial="hidden" animate="show" exit="exit" className={'container'}>

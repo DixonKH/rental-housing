@@ -111,7 +111,7 @@ const TopPropertyCard = (props: TopPropertyCardProps) => {
 				<Box component={'div'} className={'info'}>
 					<Box className={'title'}>
 						<strong>{property?.propertyTitle}</strong>
-						<p>{property?.propertyPrice}</p>
+						<p>${property?.propertyPrice}</p>
 					</Box>
 					<p className={'desc'}>{property?.propertyAddress}</p>
 					<div className={'options'}>
