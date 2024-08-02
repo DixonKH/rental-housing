@@ -14,6 +14,8 @@ import { Carousel } from '@mantine/carousel';
 import '@mantine/carousel/styles.css';
 import classes from '../../../scss/Carusel.module.css';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { fadeIn } from '../../variants';
 
 interface TrendPropertyCardProps {
 	property: Property;
@@ -101,7 +103,14 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 		);
 	} else {
 		return (
-			<Stack className="trend-card-box" key={property._id}>
+			<motion.div
+				variants={fadeIn('right', 0.4)}
+				initial="hidden"
+				whileInView={'show'}
+				viewport={{ once: false, amount: 0.5 }}
+				className="trend-card-box"
+				key={property._id}
+			>
 				<Carousel
 					withIndicators
 					height={203}
@@ -177,7 +186,7 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 						</div>
 					</div>
 				</Box>
-			</Stack>
+			</motion.div>
 		);
 	}
 };

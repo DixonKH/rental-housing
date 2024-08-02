@@ -15,6 +15,7 @@ import { T } from '../../libs/types/common';
 import { LIKE_TARGET_MEMBER } from '../../apollo/user/mutation';
 import { Messages } from '../../libs/config';
 import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
+import { motion } from 'framer-motion';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -131,7 +132,7 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 		return (
 			<>
 				<Stack className={'agent-list-page'}>
-					<Stack className="agent-header">
+					<Stack className="agent-header" sx={{ overFlow: 'hidden' }}>
 						<Stack className="header-adv">
 							<strong>Our best Agents</strong>
 							<p>
@@ -143,9 +144,13 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 								<img className="image-icon" src="/img/banner/adv1.png" alt="/" />
 							</Stack>
 						</Stack>
-						<Stack className="header-img">
+						<motion.div
+							initial={{ scale: 0.3 }}
+							animate={{ scale: 1, transition: { duration: 0.5, ease: 'easeOut' } }}
+							className="header-img"
+						>
 							<img src="/img/banner/agents.png" alt="/" />
-						</Stack>
+						</motion.div>
 					</Stack>
 					<Stack className={'container'}>
 						<Stack className={'filter'}>

@@ -12,6 +12,7 @@ import { userVar } from '../../../apollo/store';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TelegramIcon from '@mui/icons-material/Telegram';
+import { motion } from 'framer-motion';
 
 interface AgentCardProps {
 	agent: any;
@@ -30,7 +31,7 @@ const AgentCard = (props: AgentCardProps) => {
 		return <div>AGENT CARD</div>;
 	} else {
 		return (
-			<Stack className="agent-general-card">
+			<motion.div whileHover={{ scale: 1.05, transition: { duration: 0.7 } }} className="agent-general-card">
 				<Link
 					href={{
 						pathname: '/agent/detail',
@@ -113,7 +114,7 @@ const AgentCard = (props: AgentCardProps) => {
 						<Typography className="view-cnt">{agent?.memberLikes}</Typography>
 					</Box>
 				</Stack>
-			</Stack>
+			</motion.div>
 		);
 	}
 };

@@ -13,6 +13,8 @@ import { Carousel } from '@mantine/carousel';
 import '@mantine/carousel/styles.css';
 import classes from '../../../scss/Carusel.module.css';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { fadeIn } from '../../variants';
 
 interface PopularPropertyCardProps {
 	property: Property;
@@ -35,7 +37,13 @@ const PopularPropertyCard = (props: PopularPropertyCardProps) => {
 
 	if (device === 'mobile') {
 		return (
-			<Stack className="popular-card-box">
+			<motion.div
+				variants={fadeIn('left', 0.5)}
+				initial="hidden"
+				whileInView={'show'}
+				viewport={{ once: false, amount: 0.2 }}
+				className="popular-card-box"
+			>
 				<Box
 					component={'div'}
 					className={'card-img'}
@@ -83,11 +91,17 @@ const PopularPropertyCard = (props: PopularPropertyCardProps) => {
 						</div>
 					</div>
 				</Box>
-			</Stack>
+			</motion.div>
 		);
 	} else {
 		return (
-			<Stack className="popular-card-box">
+			<motion.div
+				variants={fadeIn('left', 0.3)}
+				initial="hidden"
+				whileInView={'show'}
+				viewport={{ once: false, amount: 0.7 }}
+				className="popular-card-box"
+			>
 				<Stack>
 					<Carousel
 						withIndicators
@@ -148,7 +162,7 @@ const PopularPropertyCard = (props: PopularPropertyCardProps) => {
 						</div>
 					</div>
 				</Box>
-			</Stack>
+			</motion.div>
 		);
 	}
 };

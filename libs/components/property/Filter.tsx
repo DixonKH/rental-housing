@@ -28,6 +28,7 @@ import Slider from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
 import PushPinIcon from '@mui/icons-material/PushPin';
 import SearchIcon from '@mui/icons-material/Search';
+import { motion } from 'framer-motion';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -495,7 +496,7 @@ const Filter = (props: FilterType) => {
 	} else {
 		return (
 			<Stack className={'filter-main'}>
-				<Stack className={'find-your-home'}>
+				<motion.div whileTap={{ scale: 0.8 }} className={'find-your-home'}>
 					<FormControl className={'property-location'}>
 						<img src="/img/icons/location.svg" alt="" />
 						<Select
@@ -548,7 +549,7 @@ const Filter = (props: FilterType) => {
 							))}
 						</Select>
 					</FormControl>
-				</Stack>
+				</motion.div>
 				<Stack className={'find-your-home'}>
 					<Stack className="search-bedroom">
 						<Button onClick={handleOpenModalBeds} className="bedroom-title">
@@ -743,7 +744,7 @@ const Filter = (props: FilterType) => {
 						</Stack>
 					</Stack>
 				</Stack>
-				<Stack className={'find-your-home'}>
+				<motion.div whileTap={{ scale: 0.8 }} className={'find-your-home'}>
 					<FormControl>
 						<Select
 							labelId="demo-multiple-checkbox-label"
@@ -806,7 +807,7 @@ const Filter = (props: FilterType) => {
 							))}
 						</Select>
 					</FormControl>
-				</Stack>
+				</motion.div>
 				<Stack className={'find-your-home'}>
 					<Stack className={'input-box'}>
 						<OutlinedInput

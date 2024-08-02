@@ -2,6 +2,8 @@ import React from 'react';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { Button, Container, Stack } from '@mui/material';
 import EastIcon from '@mui/icons-material/East';
+import { motion } from 'framer-motion';
+import { fadeIn } from '../../variants';
 
 const Advertisement = () => {
 	const device = useDeviceDetect();
@@ -11,7 +13,13 @@ const Advertisement = () => {
 	} else {
 		return (
 			<Container className={'advertisement'}>
-				<Stack className="left">
+				<motion.div
+					variants={fadeIn('right', 0.3)}
+					initial="hidden"
+					whileInView={'show'}
+					viewport={{ once: false, amount: 0.7 }}
+					className="left"
+				>
 					<Stack className="adv-main">
 						<p>Accomodation providerds</p>
 					</Stack>
@@ -27,10 +35,16 @@ const Advertisement = () => {
 					<Button>
 						Advertise your property <EastIcon />
 					</Button>
-				</Stack>
-				<Stack className="right">
+				</motion.div>
+				<motion.div
+					variants={fadeIn('left', 0.3)}
+					initial="hidden"
+					whileInView={'show'}
+					viewport={{ once: false, amount: 0.7 }}
+					className="right"
+				>
 					<img src="/img/community/advertise.png" alt="/" />
-				</Stack>
+				</motion.div>
 			</Container>
 		);
 	}

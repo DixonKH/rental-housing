@@ -18,6 +18,8 @@ import { GET_BOARD_ARTICLES } from '../../apollo/user/query';
 import { LIKE_TARGET_BOARD_ARTICLE } from '../../apollo/user/mutation';
 import { Messages } from '../../libs/config';
 import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
+import { motion } from 'framer-motion';
+import { transitions } from '@mantine/core/lib/components/Transition/transitions';
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -100,6 +102,16 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 		}
 	};
 
+	const list = {
+		visible: { opacity: 1, transition: { when: 'beforeChildren', staggerChildren: 0.2 } },
+		hidden: { opacity: 0, transition: { when: 'afterChildren' } },
+	};
+
+	const item = {
+		visible: { opacity: 1, y: 0 },
+		hidden: { opacity: 0, y: 100 },
+	};
+
 	if (device === 'mobile') {
 		return <h1>COMMUNITY PAGE MOBILE</h1>;
 	} else {
@@ -107,22 +119,44 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 			<div id="community-list-page">
 				<div className="container">
 					<Stack className="community-header">
-						<Stack>
+						<motion.div
+							initial={{ x: '-100px' }}
+							animate={{ transform: 'translateX(0)', transition: { duration: 0.5, ease: 'easeOut' } }}
+						>
 							<img src="/img/banner/community.png" alt="" />
-						</Stack>
+						</motion.div>
 						<Stack className="community-main">
 							<strong>Activate a live connection with the largest pool of student tenants in the South Korea</strong>
 
-							<ul>
-								<li>Easily establish a live feed of properties to the student accommodation website</li>
-								<li>Unlimited properties for just $150 (plus VAT) per city per month</li>
-								<li>Onboarding support via our dedicated customer success team</li>
-								<li>Manual property upload available for $23 per month</li>
-								<li>Enhance your letting profile via our additional marketing opportunities</li>
-							</ul>
-							<Button className="community-btn">
-								Get started now <EastIcon />
-							</Button>
+							<motion.ul initial="hidden" animate="visible" variants={list}>
+								<motion.li variants={item}>
+									Easily establish a live feed of properties to the student accommodation website
+								</motion.li>
+								<motion.li variants={item}>Unlimited properties for just $150 (plus VAT) per city per month</motion.li>
+								<motion.li variants={item}>Onboarding support via our dedicated customer success team</motion.li>
+								<motion.li variants={item}>Manual property upload available for $23 per month</motion.li>
+								<motion.li variants={item}>
+									Enhance your letting profile via our additional marketing opportunities
+								</motion.li>
+							</motion.ul>
+							<motion.div
+								initial={{ y: '100px' }}
+								animate={{ transform: 'translateY(0)', transition: { duration: 0.5, ease: 'easeOut' } }}
+							>
+								<Button
+									onClick={() =>
+										router.push({
+											pathname: '/mypage',
+											query: {
+												category: 'writeArticle',
+											},
+										})
+									}
+									className="community-btn"
+								>
+									Get started now <EastIcon />
+								</Button>
+							</motion.div>
 						</Stack>
 					</Stack>
 					<TabContext value={searchCommunity.search.articleCategory}>

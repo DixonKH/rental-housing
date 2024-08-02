@@ -13,6 +13,7 @@ import { useTranslation } from 'next-i18next';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import { motion } from 'framer-motion';
 
 const withLayoutBasic = (Component: any) => {
 	return (props: any) => {
@@ -137,10 +138,14 @@ const withLayoutBasic = (Component: any) => {
 									<strong>{t(memoizedValues.title)}</strong>
 									<span>{t(memoizedValues.desc)}</span>
 								</Stack>
-								<Stack className="container-img">
+								<motion.div
+									initial={{ x: '100px' }}
+									animate={{ transform: 'translateX(0)', transition: { duration: 0.5, ease: 'easeOut' } }}
+									className="container-img"
+								>
 									<img src={memoizedValues.bgImage} alt="" />
 									<img className="img-2" src={memoizedValues.bgFrame} alt="bg" />
-								</Stack>
+								</motion.div>
 							</Stack>
 						</div>
 

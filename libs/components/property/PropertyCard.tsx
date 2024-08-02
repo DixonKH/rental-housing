@@ -14,6 +14,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { Carousel } from '@mantine/carousel';
 import '@mantine/carousel/styles.css';
 import classes from '../../../scss/Carusel.module.css';
+import { motion } from 'framer-motion';
 
 interface PropertyCardType {
 	property: Property;

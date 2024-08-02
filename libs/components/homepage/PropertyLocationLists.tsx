@@ -3,6 +3,8 @@ import { useCallback, useRef, useState } from 'react';
 import { PropertyLocation } from '../../enums/property.enum';
 import { PropertiesInquiry } from '../../types/property/property.input';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { fadeIn } from '../../variants';
 
 interface HeaderFilterProps {
 	initialInput: PropertiesInquiry;
@@ -44,7 +46,13 @@ const PropertyLocationLists = (props: HeaderFilterProps) => {
 			<Stack className="location-title">
 				<strong>Explore popular student cities</strong>
 			</Stack>
-			<Stack className="locations">
+			<motion.div
+				variants={fadeIn('up', 0.3)}
+				initial="hidden"
+				whileInView={'show'}
+				viewport={{ once: false, amount: 0.7 }}
+				className="locations"
+			>
 				<div className={`location-cards ${openLocation ? 'on' : ''}`} ref={locationRef}>
 					{propertyLocation.map((location: string) => {
 						return (
@@ -57,7 +65,7 @@ const PropertyLocationLists = (props: HeaderFilterProps) => {
 						);
 					})}
 				</div>
-			</Stack>
+			</motion.div>
 		</Container>
 	);
 };

@@ -8,6 +8,8 @@ import { useQuery } from '@apollo/client';
 import { GET_BOARD_ARTICLES } from '../../../apollo/user/query';
 import { BoardArticleCategory } from '../../enums/board-article.enum';
 import { T } from '../../types/common';
+import { motion } from 'framer-motion';
+import { fadeUp } from '../../variants';
 
 const CommunityBoards = () => {
 	const device = useDeviceDetect();
@@ -55,9 +57,14 @@ const CommunityBoards = () => {
 			<Stack className={'community-board'}>
 				<Stack className={'container'}>
 					<Stack>
-						<Typography className="comminity-name" variant={'h1'}>
+						<motion.div
+							initial={{ scale: 0.2 }}
+							animate={{ scale: 1 }}
+							transition={{ ease: 'easeOut', duration: 2 }}
+							className="comminity-name"
+						>
 							COMMUNITY BOARD HIGHLIGHTS
-						</Typography>
+						</motion.div>
 					</Stack>
 					<Stack className="community-main">
 						<Stack className={'community-left'}>

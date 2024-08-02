@@ -12,6 +12,8 @@ import { PropertiesInquiry } from '../../types/property/property.input';
 import { useQuery } from '@apollo/client';
 import { T } from '../../types/common';
 import { GET_PROPERTIES } from '../../../apollo/user/query';
+import { motion } from 'framer-motion';
+import { fadeIn } from '../../variants';
 
 interface PopularPropertiesProps {
 	initialInput: PropertiesInquiry;
