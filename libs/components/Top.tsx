@@ -252,7 +252,7 @@ const Top = () => {
 							<Link href={'/'}>
 								<img src="/img/logo/logo1.png" alt="" />
 							</Link>
-							<Box className={'logo-text'}>
+							<Box component={'div'} className={'logo-text'}>
 								<strong>Student</strong>
 								<p>housing</p>
 							</Box>

@@ -23,7 +23,7 @@ function CustomTabPanel(props: TabPanelProps) {
 			aria-labelledby={`simple-tab-${index}`}
 			{...other}
 		>
-			{value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+			{value === index && <Stack sx={{ p: 3 }}>{children}</Stack>}
 		</div>
 	);
 }
@@ -52,9 +52,9 @@ export function BasicTabs() {
 				boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
 			}}
 		>
-			<Box sx={{ border: 'none' }}>
+			<Box component={'div'} sx={{ border: 'none' }}>
 				<Tabs value={value} onChange={handleChange}>
-					<Tab label="1" {...a11yProps(0)} style={{ Color: '#fff' }} />
+					<Tab label="1" {...a11yProps(0)} style={{ color: '#fff' }} />
 					<Tab label="2" {...a11yProps(1)} />
 					<Tab label="3" {...a11yProps(2)} />
 				</Tabs>

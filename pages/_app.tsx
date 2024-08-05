@@ -6,6 +6,7 @@ import { light } from '../scss/MaterialTheme';
 import { ApolloProvider } from '@apollo/client';
 import { useApollo } from '../apollo/client';
 import { appWithTranslation } from 'next-i18next';
+// @ts-ignore
 import { MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import '../scss/app.scss';
