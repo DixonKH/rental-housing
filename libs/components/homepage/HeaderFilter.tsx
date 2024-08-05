@@ -325,11 +325,11 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 							<span>{searchFilter?.search?.locationList ? searchFilter?.search?.locationList[0] : t('Location')} </span>
 							<ExpandMoreIcon />
 						</Box>
-						<Box className={`box ${openType ? 'on' : ''}`} onClick={typeStateChangeHandler}>
+						<Box component={'div'} className={`box ${openType ? 'on' : ''}`} onClick={typeStateChangeHandler}>
 							<span> {searchFilter?.search?.typeList ? searchFilter?.search?.typeList[0] : t('Property type')} </span>
 							<ExpandMoreIcon />
 						</Box>
-						<Box className={`box ${openRooms ? 'on' : ''}`} onClick={roomStateChangeHandler}>
+						<Box component={'div'} className={`box ${openRooms ? 'on' : ''}`} onClick={roomStateChangeHandler}>
 							<span>
 								{searchFilter?.search?.roomsList ? `${searchFilter?.search?.roomsList[0]} rooms}` : t('Rooms')}
 							</span>
@@ -337,11 +337,11 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 						</Box>
 					</Stack>
 					<Stack className={'search-box-other'}>
-						<Box className={'advanced-filter'} onClick={() => advancedFilterHandler(true)}>
+						<Box component={'div'} className={'advanced-filter'} onClick={() => advancedFilterHandler(true)}>
 							<img src="/img/icons/tune.svg" alt="" />
 							<span>{t('Advanced')}</span>
 						</Box>
-						<Box className={'search-btn'} onClick={pushSearchHandler}>
+						<Box component={'div'} className={'search-btn'} onClick={pushSearchHandler}>
 							<img src="/img/icons/search_white.svg" alt="" />
 						</Box>
 					</Stack>

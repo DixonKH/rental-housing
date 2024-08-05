@@ -736,20 +736,20 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 									</Stack>
 								)}
 								<Stack className={'box-option'}>
-									<Box className={'price'}>
+									<Box component={'div'} className={'price'}>
 										From <span>${formatterStr(property?.propertyPrice)}</span>/ month
 									</Box>
 									<Stack className={'deposite'}>
 										+ Won
 										{property?.propertyDeposite} holding Deposite
 									</Stack>
-									<Box className={'bill-text'}>
+									<Box component={'div'} className={'bill-text'}>
 										<img src="/img/bills.svg" alt="/" /> Bills included
 									</Box>
 									<Stack className={'bills'}>
 										{property?.propertyUtilityBills.map((utility, index) => {
 											return (
-												<Box className={'bill'} key={index}>
+												<Box component={'div'} className={'bill'} key={index}>
 													{utility},
 												</Box>
 											);

@@ -89,7 +89,9 @@ const PropertyCard = (props: PropertyCardType) => {
 							>
 								<Typography>{property.propertyTitle}</Typography>
 							</Link>
-							<Box className="price">${formatterStr(property.propertyPrice)}</Box>
+							<Box component={'div'} className="price">
+								${formatterStr(property.propertyPrice)}
+							</Box>
 						</Stack>
 						<Stack className="address">
 							<Typography>

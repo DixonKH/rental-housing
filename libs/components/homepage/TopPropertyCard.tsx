@@ -107,9 +107,11 @@ const TopPropertyCard = (props: TopPropertyCardProps) => {
 						);
 					})}
 				</Carousel>
-				<Box className="property-type">{property.propertyType}</Box>
+				<Box component={'div'} className="property-type">
+					{property.propertyType}
+				</Box>
 				<Box component={'div'} className={'info'}>
-					<Box className={'title'}>
+					<Box component={'div'} className={'title'}>
 						<strong>{property?.propertyTitle}</strong>
 						<p>${property?.propertyPrice}</p>
 					</Box>

@@ -130,7 +130,9 @@ const PopularPropertyCard = (props: PopularPropertyCardProps) => {
 						})}
 					</Carousel>
 				</Stack>
-				<Box className="property-type">{property.propertyType}</Box>
+				<Box component={'div'} className="property-type">
+					{property.propertyType}
+				</Box>
 				<Box component={'div'} className={'info'}>
 					<Box className={'title'}>
 						<strong onClick={() => pushDetailHandler(property._id)}>{property.propertyTitle}</strong>

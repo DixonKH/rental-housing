@@ -72,14 +72,14 @@ const Join: NextPage = () => {
 					<Stack className={'main'}>
 						<Stack className={'center'}>
 							{/* @ts-ignore */}
-							<Box className={'logo'}>
+							<Box className={'logo'} component={'div'}>
 								<img src="/img/logo/logo.png" alt="" />
 							</Box>
-							<Box className={'info'}>
+							<Box className={'info'} component={'div'}>
 								<span>{loginView ? 'login' : 'signup'}</span>
 								<p>{loginView ? 'Login' : 'Sign'} in with this account across the following sites.</p>
 							</Box>
-							<Box className={'input-wrap'}>
+							<Box className={'input-wrap'} component={'div'}>
 								<div className={'input-box'}>
 									<span>Nickname</span>
 									<input
@@ -121,7 +121,7 @@ const Join: NextPage = () => {
 									</div>
 								)}
 							</Box>
-							<Box className={'register'}>
+							<Box className={'register'} component={'div'}>
 								{!loginView && (
 									<div className={'type-option'}>
 										<span className={'text'}>I want to be registered as:</span>
@@ -185,7 +185,7 @@ const Join: NextPage = () => {
 									</Button>
 								)}
 							</Box>
-							<Box className={'ask-info'}>
+							<Box className={'ask-info'} component={'div'}>
 								{loginView ? (
 									<p>
 										Not registered yet?

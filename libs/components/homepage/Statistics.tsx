@@ -9,7 +9,7 @@ const Statistics = () => {
 		<Stack className={'statistic'}>
 			<Container className="stat-container">
 				<Stack className="stat-div">
-					<Box>
+					<Box component={'div'}>
 						<img src="/img/logo/star.svg" alt="" />
 					</Box>
 					<Stack className="stat-info">
@@ -18,7 +18,7 @@ const Statistics = () => {
 					</Stack>
 				</Stack>
 				<Stack className="stat-div">
-					<Box>
+					<Box component={'div'}>
 						<img src="/img/logo/home.svg" alt="" />
 					</Box>
 					<Stack className="stat-info">
@@ -27,7 +27,7 @@ const Statistics = () => {
 					</Stack>
 				</Stack>
 				<Stack className="stat-div">
-					<Box>
+					<Box component={'div'}>
 						<img src="/img/logo/message.svg" alt="" />
 					</Box>
 					<Stack className="stat-info">
@@ -36,7 +36,7 @@ const Statistics = () => {
 					</Stack>
 				</Stack>
 				<Stack className="stat-div">
-					<Box>
+					<Box component={'div'}>
 						<img src="/img/logo/security.svg" alt="" />
 					</Box>
 					<Stack className="stat-info">
