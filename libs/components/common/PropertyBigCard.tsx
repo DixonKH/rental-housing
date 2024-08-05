@@ -59,7 +59,9 @@ const PropertyBigCard = (props: PropertyBigCardProps) => {
 						})}
 					</Carousel>
 				</Stack>
-				<Box className="property-type">{property.propertyType}</Box>
+				<Box component={'div'} className="property-type">
+					{property.propertyType}
+				</Box>
 				<IconButton color={'default'} className="like-btn" onClick={() => likePropertyHandler(user, property?._id)}>
 					{property?.meLiked && property?.meLiked[0]?.myFavorite ? (
 						<FavoriteIcon color="primary" style={{ color: 'red' }} />
