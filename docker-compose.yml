@@ -1,5 +1,3 @@
-version: '3.3'
-
 services:
   rent-housing:
     container_name: rent-housing
