@@ -20,6 +20,7 @@ import { NEXT_PUBLIC_API_URL } from '../config';
 import { GET_NOTIFICATIONS } from '../../apollo/user/query';
 import { UPDATE_NOTIFICATION } from '../../apollo/user/mutation';
 import { T } from '../types/common';
+import { LuSchool } from "react-icons/lu";
 import { NotificationStatus } from '../enums/notification.enum';
 import { Notification } from '../types/notification/notification';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
@@ -250,17 +251,13 @@ const Top = () => {
 					<Stack className={'container'}>
 						<Box component={'div'} className={'logo-box'}>
 							<Link href={'/'}>
-								<img src="/img/logo/logo1.png" alt="" />
+								<LuSchool size={32} color='#ffffff' />
 							</Link>
-							<Box component={'div'} className={'logo-text'}>
-								<strong>Student</strong>
-								<p>housing</p>
-							</Box>
 						</Box>
 						<motion.div
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
-							transition={{ duration: 1, delay: 0.3 }}
+							transition={{ duration: 1, delay: 0.2 }}
 							className={'router-box'}
 						>
 							<Link href={'/'}>

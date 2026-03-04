@@ -4,7 +4,8 @@ import TelegramIcon from '@mui/icons-material/Telegram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import useDeviceDetect from '../hooks/useDeviceDetect';
 import { Stack, Box } from '@mui/material';
-import moment from 'moment';
+import { LuSchool } from "react-icons/lu";
+import Link from 'next/link';
 
 const Footer = () => {
 	const device = useDeviceDetect();
@@ -15,7 +16,9 @@ const Footer = () => {
 				<Stack className={'main'}>
 					<Stack className={'left'}>
 						<Box component={'div'} className={'footer-box'}>
-							<img src="/img/logo/logoWhite.svg" alt="" className={'logo'} />
+							<Link href={'/'}>
+								<LuSchool size={32} color='#ffffff' />
+							</Link>
 						</Box>
 						<Box component={'div'} className={'footer-box'}>
 							<span>total free customer care</span>
@@ -97,11 +100,12 @@ const Footer = () => {
 									<FacebookOutlinedIcon />
 									<TelegramIcon />
 									<InstagramIcon />
-									<TwitterIcon />
 								</div>
 							</Box>
 							<Box component={'div'} className={'footer-box'}>
-								<img src="/img/logo/logo1.png" alt="" className={'logo'} />
+								<Link href={'/'}>
+								<LuSchool size={36} color='#ffffff' />
+							</Link>
 							</Box>
 						</Box>
 						<Box component={'div'} className={'bottom'}>

@@ -41,16 +41,31 @@ const PropertyLocationLists = (props: HeaderFilterProps) => {
 		},
 		[searchFilter],
 	);
+
+	const fadeInUp = {
+		hidden: {
+			opacity: 0,
+			y: 40,
+		},
+		show: {
+			opacity: 1,
+			y: 0,
+			transition: {
+				duration: 0.6,
+				ease: 'easeOut',
+			},
+		},
+	};
 	return (
 		<Container className={'location-list'}>
 			<Stack className="location-title">
 				<strong>Explore popular student cities</strong>
 			</Stack>
 			<motion.div
-				variants={fadeIn('up', 0.3)}
+				variants={fadeInUp}
 				initial="hidden"
 				whileInView={'show'}
-				viewport={{ once: false, amount: 0.7 }}
+				viewport={{ once: true }}
 				className="locations"
 			>
 				<div className={`location-cards ${openLocation ? 'on' : ''}`} ref={locationRef}>

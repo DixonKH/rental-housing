@@ -21,7 +21,7 @@ export const getStaticProps = async ({ locale }: any) => ({
 
 const Home: NextPage = () => {
 	const device = useDeviceDetect();
-
+ 
 	if (device === 'mobile') {
 		return (
 			<Stack className={'home-page'}>
