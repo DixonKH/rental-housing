@@ -16,7 +16,7 @@ import { useRouter } from 'next/router';
 import { Property } from '../../libs/types/property/property';
 import moment from 'moment';
 import { formatterStr } from '../../libs/utils';
-import { REACT_APP_API_URL } from '../../libs/config';
+import { NEXT_PUBLIC_API_URL } from '../../libs/config';
 import { userVar } from '../../apollo/store';
 import { CommentInput, CommentsInquiry } from '../../libs/types/comment/comment.input';
 import { Comment } from '../../libs/types/comment/comment';
@@ -348,13 +348,13 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 							<Stack className={'images'}>
 								<Stack className={'main-image'}>
 									<img
-										src={slideImage ? `${REACT_APP_API_URL}/${slideImage}` : '/img/property/bigImage.png'}
+										src={slideImage ? `${NEXT_PUBLIC_API_URL}/${slideImage}` : '/img/property/bigImage.png'}
 										alt={'main-image'}
 									/>
 								</Stack>
 								<Stack className={'sub-images'}>
 									{property?.propertyImages.map((subImg: string) => {
-										const imagePath: string = `${REACT_APP_API_URL}/${subImg}`;
+										const imagePath: string = `${NEXT_PUBLIC_API_URL}/${subImg}`;
 										return (
 											<Stack className={'sub-img-box'} onClick={() => changeImageHandler(subImg)} key={subImg}>
 												<img src={imagePath} alt={'sub-image'} />
@@ -638,7 +638,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 													className={'member-image'}
 													src={
 														property?.memberData?.memberImage
-															? `${REACT_APP_API_URL}/${property?.memberData?.memberImage}`
+															? `${NEXT_PUBLIC_API_URL}/${property?.memberData?.memberImage}`
 															: '/img/profile/defaultUser.svg'
 													}
 												/>

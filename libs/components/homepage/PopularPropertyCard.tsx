@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { Property } from '../../types/property/property';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import { REACT_APP_API_URL, topPropertyRank } from '../../config';
+import { NEXT_PUBLIC_API_URL, topPropertyRank } from '../../config';
 import { useRouter } from 'next/router';
 import { useReactiveVar } from '@apollo/client';
 import { userVar } from '../../../apollo/store';
@@ -47,7 +47,7 @@ const PopularPropertyCard = (props: PopularPropertyCardProps) => {
 				<Box
 					component={'div'}
 					className={'card-img'}
-					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${property?.propertyImages[0]})` }}
+					style={{ backgroundImage: `url(${NEXT_PUBLIC_API_URL}/${property?.propertyImages[0]})` }}
 					onClick={() => pushDetailHandler(property._id)}
 				>
 					{property && property?.propertyRank >= topPropertyRank ? (
@@ -114,7 +114,7 @@ const PopularPropertyCard = (props: PopularPropertyCardProps) => {
 						className="carousel"
 					>
 						{property?.propertyImages.map((image, index) => {
-							const imagePath = `${REACT_APP_API_URL}/${image}`;
+							const imagePath = `${NEXT_PUBLIC_API_URL}/${image}`;
 							return (
 								<Carousel.Slide key={index}>
 									<Link

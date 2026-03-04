@@ -5,7 +5,7 @@ import useDeviceDetect from '../../hooks/useDeviceDetect';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Property } from '../../types/property/property';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import { REACT_APP_API_URL } from '../../config';
+import { NEXT_PUBLIC_API_URL } from '../../config';
 import { formatterStr } from '../../utils';
 import { useRouter } from 'next/router';
 import { useReactiveVar } from '@apollo/client';
@@ -44,7 +44,7 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 						}}
 					>
 						{property.propertyImages.map((image, index) => {
-							const imagePath = `${REACT_APP_API_URL}/${image}`;
+							const imagePath = `${NEXT_PUBLIC_API_URL}/${image}`;
 							return (
 								<Carousel.Slide key={index}>
 									<Link
@@ -122,7 +122,7 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 					className="carousel"
 				>
 					{property?.propertyImages.map((image, index) => {
-						const imagePath = `${REACT_APP_API_URL}/${image}`;
+						const imagePath = `${NEXT_PUBLIC_API_URL}/${image}`;
 						return (
 							<Carousel.Slide key={index}>
 								<Link

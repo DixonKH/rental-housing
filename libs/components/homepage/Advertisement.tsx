@@ -7,6 +7,7 @@ import { fadeIn } from '../../variants';
 
 const Advertisement = () => {
 	const device = useDeviceDetect();
+	console.log("GRAPHQL URL:", process.env.NEXT_PUBLIC_AI_GRAPHQL_URL);
 
 	if (device == 'mobile') {
 		return <Stack className={'advertisement'}></Stack>;
