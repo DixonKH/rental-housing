@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Stack, Box } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
-import WestIcon from '@mui/icons-material/West';
-import EastIcon from '@mui/icons-material/East';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination } from 'swiper';
 import { Property } from '../../types/property/property';
@@ -103,13 +101,6 @@ const TrendProperties = (props: TrendPropertiesProps) => {
 							<span>Trend Properties</span>
 							<p>Trend is based on likes</p>
 						</Box>
-						<Box component={'div'} className={'right'}>
-							<div className={'pagination-box'}>
-								<WestIcon className={'swiper-trend-prev'} />
-								<div className={'swiper-trend-pagination'}></div>
-								<EastIcon className={'swiper-trend-next'} />
-							</div>
-						</Box>
 					</Stack>
 					<Stack className={'card-box'}>
 						{trendProperties.length === 0 ? (
@@ -121,14 +112,16 @@ const TrendProperties = (props: TrendPropertiesProps) => {
 								className={'trend-property-swiper'}
 								slidesPerView={'auto'}
 								spaceBetween={15}
+								loop={true}
+								speed={800}
+								grabCursor={true}
+								autoplay={{
+									delay: 4000,
+									disableOnInteraction: false,
+								}}
 								modules={[Autoplay, Navigation, Pagination]}
-								navigation={{
-									nextEl: '.swiper-trend-next',
-									prevEl: '.swiper-trend-prev',
-								}}
-								pagination={{
-									el: '.swiper-trend-pagination',
-								}}
+								navigation={true}
+								pagination={{ clickable: true }}
 							>
 								{trendProperties.map((property: Property) => {
 									return (

@@ -103,11 +103,7 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 		);
 	} else {
 		return (
-			<motion.div
-				variants={fadeIn('right', 0.4)}
-				initial="hidden"
-				whileInView={'show'}
-				viewport={{ once: false, amount: 0.5 }}
+			<div
 				className="trend-card-box"
 				key={property._id}
 			>
@@ -188,7 +184,7 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 						</div>
 					</div>
 				</Box>
-			</motion.div>
+			</div>
 		);
 	}
 };

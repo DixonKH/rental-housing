@@ -4,7 +4,7 @@ import { PropertyLocation } from '../../enums/property.enum';
 import { PropertiesInquiry } from '../../types/property/property.input';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { fadeIn } from '../../variants';
+import { fadeInUp } from '../../variants';
 
 interface HeaderFilterProps {
 	initialInput: PropertiesInquiry;
@@ -42,20 +42,6 @@ const PropertyLocationLists = (props: HeaderFilterProps) => {
 		[searchFilter],
 	);
 
-	const fadeInUp = {
-		hidden: {
-			opacity: 0,
-			y: 40,
-		},
-		show: {
-			opacity: 1,
-			y: 0,
-			transition: {
-				duration: 0.6,
-				ease: 'easeOut',
-			},
-		},
-	};
 	return (
 		<Container className={'location-list'}>
 			<Stack className="location-title">

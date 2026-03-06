@@ -1,29 +1,21 @@
-export const fadeIn = (direction: string, delay: number) => {
-	return {
-		hidden: {
-			y: direction === 'up' ? 150 : direction === 'down' ? 150 : 0,
-			x: direction === 'left' ? 80 : direction === 'right' ? -80 : 0,
-		},
-		show: {
-			y: 0,
-			x: 0,
-			opacity: 1,
-			transition: {
-				type: 'tween',
-				duration: 1,
-				delay: delay,
-				ease: [0.25, 0.25, 0.25, 0.25],
-			},
-		},
-		exit: {
-			opacity: 0,
-			y: 50,
-			transition: {
-				duration: 0.2,
-				ease: 'easeInOut',
-			},
-		},
-	};
+export const fadeIn = (direction = "up", delay = 0) => {
+  return {
+    hidden: {
+      opacity: 0,
+      x: direction === "left" ? -40 : direction === "right" ? 40 : 0,
+      y: direction === "up" ? 40 : direction === "down" ? -40 : 0
+    },
+    show: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        delay,
+        ease: "easeOut"
+      }
+    }
+  };
 };
 
 export const fadeUp = (delay: number) => {
@@ -53,3 +45,18 @@ export const fadeUp = (delay: number) => {
 		},
 	};
 };
+
+export const fadeInUp = {
+		hidden: {
+			opacity: 0,
+			y: 40,
+		},
+		show: {
+			opacity: 1,
+			y: 0,
+			transition: {
+				duration: 0.6,
+				ease: 'easeOut',
+			},
+		},
+	};

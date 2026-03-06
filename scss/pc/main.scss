@@ -445,7 +445,7 @@ body::-webkit-scrollbar {
 						cursor: pointer;
 						&:hover {
 							border-radius: 5px;
-							border: 1px solid #b9b9b9;
+							border: 1px solid #34cc99;
 							box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 						}
 					}
@@ -998,6 +998,33 @@ body::-webkit-scrollbar {
 					height: auto;
 					display: flex;
 					flex-direction: row;
+
+					.MuiOutlinedInput-root {
+						height: 46px;
+						border-radius: 8px;
+
+						.MuiOutlinedInput-notchedOutline {
+							border-color: #34cc99; // yashil
+						}
+
+						&:hover .MuiOutlinedInput-notchedOutline {
+							border-color: #34cc99; // hover o'zgarmaydi
+						}
+
+						&.Mui-focused .MuiOutlinedInput-notchedOutline {
+							border-color: #34cc99; // active o'zgarmaydi
+						}
+					}
+
+					/* label bo'lsa */
+					.MuiInputLabel-root {
+						color: #717171;
+
+						&.Mui-focused {
+							color: #717171;
+						}
+					}
+
 					&.space-between {
 						justify-content: space-between;
 					}
@@ -1025,9 +1052,10 @@ body::-webkit-scrollbar {
 							border-radius: 0px 12px 12px 0px;
 						}
 						&.active {
-							border: 2px solid #181a20;
+							border: 2px solid #34cc99;
 						}
 					}
+					/* MUI Select outline */
 					select {
 						padding-left: 13px;
 						width: 100%;

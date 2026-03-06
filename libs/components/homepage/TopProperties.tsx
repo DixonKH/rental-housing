@@ -14,6 +14,7 @@ import { T } from '../../types/common';
 import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../sweetAlert';
 import { LIKE_TARGET_PROPERTY } from '../../../apollo/user/mutation';
 import { Message } from '../../enums/common.enum';
+import { motion } from 'framer-motion';
 
 interface TopPropertiesProps {
 	initialInput: PropertiesInquiry;
@@ -102,29 +103,36 @@ const TopProperties = (props: TopPropertiesProps) => {
 							</div>
 						</Box>
 					</Stack>
-					<Stack className={'card-box'}>
-						<Swiper
-							className={'top-property-swiper'}
-							slidesPerView={'auto'}
-							spaceBetween={15}
-							modules={[Autoplay, Navigation, Pagination]}
-							navigation={{
-								nextEl: '.swiper-top-next',
-								prevEl: '.swiper-top-prev',
-							}}
-							pagination={{
-								el: '.swiper-top-pagination',
-							}}
-						>
-							{topProperties.map((property: Property) => {
-								return (
-									<SwiperSlide className={'top-property-slide'} key={property?._id}>
-										<TopPropertyCard property={property} likePropertyHandler={likePropertyHandler} />
-									</SwiperSlide>
-								);
-							})}
-						</Swiper>
-					</Stack>
+					<motion.div
+						initial={{ opacity: 0, x: -80 }}
+						whileInView={{ opacity: 1, x: 0 }}
+						transition={{ duration: 0.6, ease: 'easeOut' }}
+						viewport={{ once: true, margin: '-100px' }}
+					>
+						<Stack className={'card-box'}>
+							<Swiper
+								className={'top-property-swiper'}
+								slidesPerView={'auto'}
+								spaceBetween={15}
+								modules={[Autoplay, Navigation, Pagination]}
+								navigation={{
+									nextEl: '.swiper-top-next',
+									prevEl: '.swiper-top-prev',
+								}}
+								pagination={{
+									el: '.swiper-top-pagination',
+								}}
+							>
+								{topProperties.map((property: Property) => {
+									return (
+										<SwiperSlide className={'top-property-slide'} key={property?._id}>
+											<TopPropertyCard property={property} likePropertyHandler={likePropertyHandler} />
+										</SwiperSlide>
+									);
+								})}
+							</Swiper>
+						</Stack>
+					</motion.div>
 				</Stack>
 			</Stack>
 		);

@@ -13,6 +13,7 @@ import { Carousel } from '@mantine/carousel';
 import '@mantine/carousel/styles.css';
 import classes from '../../../scss/Carusel.module.css';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 interface TopPropertyCardProps {
 	property: Property;
@@ -80,79 +81,88 @@ const TopPropertyCard = (props: TopPropertyCardProps) => {
 		);
 	} else {
 		return (
-			<Stack className="top-card-box">
-				<Carousel
-					withIndicators
-					height={203}
-					classNames={{
-						root: classes.carousel,
-						controls: classes.carouselControls,
-						indicator: classes.carouselIndicator,
-					}}
-					className="carousel"
-				>
-					{property?.propertyImages.map((image, index) => {
-						const imagePath = `${NEXT_PUBLIC_API_URL}/${image}`;
-						return (
-							<Carousel.Slide key={index}>
-								<Link
-									href={{
-										pathname: '/property/detail',
-										query: { id: property?._id },
-									}}
-								>
-									<img src={imagePath} alt={property?.propertyTitle} />
-								</Link>
-							</Carousel.Slide>
-						);
-					})}
-				</Carousel>
-				<Box component={'div'} className="property-type">
-					{property.propertyType}
-				</Box>
-				<Box component={'div'} className={'info'}>
-					<Box component={'div'} className={'title'}>
-						<strong>{property?.propertyTitle}</strong>
-						<p>${property?.propertyPrice}</p>
+			<motion.div
+				whileHover={{
+					y: -10,
+					scale: 1.05,
+				}}
+				transition={{ type: 'spring', stiffness: 200 }}
+				className="top-card-box"
+			>
+				<Stack>
+					<Carousel
+						withIndicators
+						height={203}
+						classNames={{
+							root: classes.carousel,
+							controls: classes.carouselControls,
+							indicator: classes.carouselIndicator,
+						}}
+						className="carousel"
+					>
+						{property?.propertyImages.map((image, index) => {
+							const imagePath = `${NEXT_PUBLIC_API_URL}/${image}`;
+							return (
+								<Carousel.Slide key={index}>
+									<Link
+										href={{
+											pathname: '/property/detail',
+											query: { id: property?._id },
+										}}
+									>
+										<img src={imagePath} alt={property?.propertyTitle} />
+									</Link>
+								</Carousel.Slide>
+							);
+						})}
+					</Carousel>
+					<Box component={'div'} className="property-type">
+						{property.propertyType}
 					</Box>
-					<p className={'desc'}>{property?.propertyAddress}</p>
-					<div className={'options'}>
-						<div>
-							<img src="/img/icons/bed.svg" alt="" />
-							<span>{property?.propertyBeds} bed</span>
+					<Box component={'div'} className={'info'}>
+						<Box component={'div'} className={'title'}>
+							<strong>{property?.propertyTitle}</strong>
+							<p>${property?.propertyPrice}</p>
+						</Box>
+						<p className={'desc'}>{property?.propertyAddress}</p>
+						<div className={'options'}>
+							<div>
+								<img src="/img/icons/bed.svg" alt="" />
+								<span>{property?.propertyBeds} bed</span>
+							</div>
+							<div>
+								<img src="/img/icons/room.svg" alt="" />
+								<span>{property?.propertyRooms} rooms</span>
+							</div>
+							<div>
+								<img src="/img/icons/expand.svg" alt="" />
+								<span>{property?.propertySquare} m2</span>
+							</div>
 						</div>
-						<div>
-							<img src="/img/icons/room.svg" alt="" />
-							<span>{property?.propertyRooms} rooms</span>
+						<Divider sx={{ mt: '15px', mb: '17px' }} />
+						<div className={'bott'}>
+							<p>
+								{' '}
+								{property.propertyRent ? 'Rent' : ''} {property.propertyRent && '/'}{' '}
+							</p>
+							<div className="view-like-box">
+								<IconButton color={'default'}>
+									<RemoveRedEyeIcon />
+								</IconButton>
+								<Typography className="view-cnt">{property?.propertyViews}</Typography>
+								<IconButton color={'default'} onClick={() => likePropertyHandler(user, property?._id)}>
+									{property?.meLiked && property?.meLiked[0]?.myFavorite ? (
+										<FavoriteIcon style={{ color: 'red' }} />
+									) : (
+										<FavoriteIcon />
+									)}
+								</IconButton>
+								<Typography className="view-cnt">{property?.propertyLikes}</Typography>
+							</div>
 						</div>
-						<div>
-							<img src="/img/icons/expand.svg" alt="" />
-							<span>{property?.propertySquare} m2</span>
-						</div>
-					</div>
-					<Divider sx={{ mt: '15px', mb: '17px' }} />
-					<div className={'bott'}>
-						<p>
-							{' '}
-							{property.propertyRent ? 'Rent' : ''} {property.propertyRent && '/'}{' '}
-						</p>
-						<div className="view-like-box">
-							<IconButton color={'default'}>
-								<RemoveRedEyeIcon />
-							</IconButton>
-							<Typography className="view-cnt">{property?.propertyViews}</Typography>
-							<IconButton color={'default'} onClick={() => likePropertyHandler(user, property?._id)}>
-								{property?.meLiked && property?.meLiked[0]?.myFavorite ? (
-									<FavoriteIcon style={{ color: 'red' }} />
-								) : (
-									<FavoriteIcon />
-								)}
-							</IconButton>
-							<Typography className="view-cnt">{property?.propertyLikes}</Typography>
-						</div>
-					</div>
-				</Box>
-			</Stack>
+					</Box>
+				</Stack>
+			</motion.div>
 		);
 	}
 };

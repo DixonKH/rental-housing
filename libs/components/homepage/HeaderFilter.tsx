@@ -381,7 +381,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 							);
 						})}
 					</div>
-				</Stack>
+				</Stack> 
 
 				{/* ADVANCED FILTER MODAL */}
 				<Modal

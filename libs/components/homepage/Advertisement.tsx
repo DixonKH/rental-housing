@@ -7,7 +7,7 @@ import { fadeIn } from '../../variants';
 
 const Advertisement = () => {
 	const device = useDeviceDetect();
-	console.log("GRAPHQL URL:", process.env.NEXT_PUBLIC_AI_GRAPHQL_URL);
+	console.log('GRAPHQL URL:', process.env.NEXT_PUBLIC_AI_GRAPHQL_URL);
 
 	if (device == 'mobile') {
 		return <Stack className={'advertisement'}></Stack>;
@@ -15,10 +15,11 @@ const Advertisement = () => {
 		return (
 			<Container className={'advertisement'}>
 				<motion.div
-					variants={fadeIn('right', 0.3)}
+					variants={fadeIn('right', 0.1)}
 					initial="hidden"
-					whileInView={'show'}
-					viewport={{ once: false, amount: 0.7 }}
+					whileInView="show"
+					viewport={{ once: true, margin: '-100px' }}
+					transition={{ duration: 0.6 }}
 					className="left"
 				>
 					<Stack className="adv-main">
@@ -33,15 +34,17 @@ const Advertisement = () => {
 							thousands of students daily. Get unparalleled exposure and attract the ideal tenants for your spaces!
 						</p>
 					</Stack>
-					<Button>
+					<Button
+					>
 						Advertise your property <EastIcon />
 					</Button>
 				</motion.div>
 				<motion.div
-					variants={fadeIn('left', 0.3)}
+					variants={fadeIn('left', 0.2)}
 					initial="hidden"
-					whileInView={'show'}
-					viewport={{ once: false, amount: 0.7 }}
+					whileInView="show"
+					viewport={{ once: true, margin: '-100px' }}
+					transition={{ duration: 0.6 }}
 					className="right"
 				>
 					<img src="/img/community/advertise.png" alt="/" />

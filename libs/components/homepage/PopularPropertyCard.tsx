@@ -38,10 +38,12 @@ const PopularPropertyCard = (props: PopularPropertyCardProps) => {
 	if (device === 'mobile') {
 		return (
 			<motion.div
-				variants={fadeIn('left', 0.5)}
+				variants={fadeIn('left', 0.1)}
 				initial="hidden"
 				whileInView={'show'}
-				viewport={{ once: false, amount: 0.2 }}
+				viewport={{ once: true }}
+				transition={{ type: 'tween' }}
+				whileHover={{ y: -8 }}
 				className="popular-card-box"
 			>
 				<Box
@@ -96,10 +98,10 @@ const PopularPropertyCard = (props: PopularPropertyCardProps) => {
 	} else {
 		return (
 			<motion.div
-				variants={fadeIn('left', 0.3)}
+				variants={fadeIn('left', 0.1)}
 				initial="hidden"
 				whileInView={'show'}
-				viewport={{ once: false, amount: 0.7 }}
+				viewport={{ once: true }}
 				className="popular-card-box"
 			>
 				<Stack>
